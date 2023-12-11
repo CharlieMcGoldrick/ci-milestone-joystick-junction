@@ -1,0 +1,1 @@
+web: gunicorn joystick_junction.wsgi:application
