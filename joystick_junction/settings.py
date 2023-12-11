@@ -32,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-charliemcgoldrick-ci-mil-5upcq0rijn.us2.codeanyapp.com',
-    'ci-ms4-joystick-junction-0cc6e816f0dd.herokuapp.com/'
+    'ci-ms4-joystick-junction-0cc6e816f0dd.herokuapp.com'
 ]
 
 
