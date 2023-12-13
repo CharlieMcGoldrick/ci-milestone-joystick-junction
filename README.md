@@ -219,4 +219,51 @@ Touchpoints - Responsive Website
 
 </details>
 
+<details>
+<summary><h3>Skeleton</h3></summary>
+
+<details>
+<summary><h3>Wireframe - Desktop Homepage - Sprint 1</h3></summary>
+
+![Wireframe - Desktop Homepage](/static/images/readme/uxd/skeleton/1.wireframe_desktop_homepage_sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Desktop Game Page - About - Sprint 1</h3></summary>
+
+![Wireframe - Desktop Game Page - About](/static/images/readme/uxd/skeleton/2.wireframe_desktop_game-page_about-sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Desktop Game Page - Main thread and subthreads - Sprint 1</h3></summary>
+
+![Wireframe - Desktop Game Page - Main thread and subthreads](/static/images/readme/uxd/skeleton/3.wireframe_desktop_game-page_main-thread%20-and-subthreads_sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Mobile Homepage - Sprint 1</h3></summary>
+
+![Wireframe - Mobile homepage](/static/images/readme/uxd/skeleton/4.wireframe_mobile_homepage1_sprint1.png)
+![Wireframe - Mobile homepage](/static/images/readme/uxd/skeleton/5.wireframe_mobile_homepage2_sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Mobile Homepage - Sprint 1</h3></summary>
+
+![Wireframe - Mobile homepage - About](/static/images/readme/uxd/skeleton/6.wireframe_mobile_game-page-about_sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Mobile Homepage - Sprint 1</h3></summary>
+
+![Wireframe - Mobile homepage - Main thread and subthreads](/static/images/readme/uxd/skeleton/7.wireframe_mobile_game-page_main-thread-and-subthreads_sprint1.png)
+
+</details>
+</details>
+
 </details>
