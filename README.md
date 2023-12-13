@@ -210,4 +210,13 @@ Join Joystick Junction to be part of a dynamic community where your voice matter
 
 </details>
 
+<details>
+<summary><h3>Structure</h3></summary>
+
+Touchpoints - Responsive Website
+
+![Joystick Junction Information Architecture](/static/images/readme/uxd/strategy/joystick_junction_strategy_tradeoffs_graph.png)
+
+</details>
+
 </details>
