@@ -138,4 +138,12 @@ Join Joystick Junction to be part of a dynamic community where your voice matter
 
 </details>
 
+<details>
+<summary><h4>Strategy Tradeoffs</h4></summary>
+
+![Joystick Junction Tradeoff Table](/static/images/readme/uxd/strategy/joystick_junction_strategy-tradeoffs-table.png)
+
+![Joystick Junction Tradeoff Graph](/static/images/readme/uxd/strategy/joystick_junction_strategy_tradeoffs_graph.png)
+</details>
+
 </details>
