@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-charliemcgoldrick-ci-mil-5upcq0rijn.us2.codeanyapp.com',
+    '8000-charliemcgoldrick-ci-ms4-h04io2ar4b.us2.codeanyapp.com',
     'ci-ms4-joystick-junction-0cc6e816f0dd.herokuapp.com'
 ]
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_summernote',
     'message_board',
 ]
 
@@ -141,3 +142,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Twitch variables to get IGDB API
+TWITCH_CLIENT_ID = os.environ.get('TWITCH_CLIENT_ID')
+TWITCH_CLIENT_SECRET = os.environ.get('TWITCH_CLIENT_SECRET')
