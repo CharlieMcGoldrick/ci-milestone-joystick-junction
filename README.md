@@ -279,7 +279,7 @@ For the body text, I'm pairing it with Open Sans, another sans-serif font that c
 
 <h4>Colours</h4>
 
-![Synaptic Surge Colour Swatch](static/images/readme/uxd/surface/)
+![Synaptic Surge Colour Swatch](static/images/readme/uxd/surface/joystick_junction_colour_swatch.png)
 
 - #0c0c0e (Very Dark Blue-Gray): This color is almost black but with a hint of blue, making it a sophisticated and strong choice for your primary color. It's ideal for key elements such as headers, footers, and primary backgrounds. It can also be used effectively for important text, offering a subtle alternative to pure black.
 - #ffffff (Pure White): This classic, clean color is perfect for backgrounds, especially to create a stark contrast with darker colors. It's also suitable for primary text and user interface elements like cards, buttons, and input fields, offering maximum readability and a crisp, clean look.
@@ -325,4 +325,5 @@ Databases
 - [Am I Responsive?](https://ui.dev/amiresponsive) Used to create mock-ups for various screen sizes.
 - [Dynamic Drive](http://tools.dynamicdrive.com/favicon/) Used to create favicon.
 
+</details>
 </details>
