@@ -145,7 +145,7 @@ Join Joystick Junction to be part of a dynamic community where your voice matter
 
 ![Joystick Junction Tradeoff Graph](/static/images/readme/uxd/strategy/joystick_junction_strategy_tradeoffs_graph.png)
 </details>
-
+</details>
 
 <details>
 <summary><h3>Scope</h3></summary>
@@ -265,5 +265,64 @@ Touchpoints - Responsive Website
 
 </details>
 </details>
+
+<details>
+    <summary><h3>Surface</h3></summary>
+
+<h4>Fonts</h4>
+
+Headings - [Roboto Slab](https://fonts.google.com/specimen/Roboto+Slab?query=Roboto+Slab)
+I've chosen Roboto Condensed for my heading font because it's a sans-serif that's both modern and clean, perfect for my headings. It really stands out and maintains excellent readability, which is crucial for my subheadings and menu items.
+
+Body Text - [Open Sans](https://fonts.google.com/specimen/Open+Sans?query=Open+Sans)
+For the body text, I'm pairing it with Open Sans, another sans-serif font that complements Roboto Condensed nicely. It's made for clear legibility across web and mobile interfaces. Its friendly and neutral design is just what I need for the lengthy forum posts and discussions on my site.
+
+<h4>Colours</h4>
+
+![Synaptic Surge Colour Swatch](static/images/readme/uxd/surface/)
+
+- #0c0c0e (Very Dark Blue-Gray): This color is almost black but with a hint of blue, making it a sophisticated and strong choice for your primary color. It's ideal for key elements such as headers, footers, and primary backgrounds. It can also be used effectively for important text, offering a subtle alternative to pure black.
+- #ffffff (Pure White): This classic, clean color is perfect for backgrounds, especially to create a stark contrast with darker colors. It's also suitable for primary text and user interface elements like cards, buttons, and input fields, offering maximum readability and a crisp, clean look.
+- #4250e4 (Vivid Blue): This bright, lively blue is eye-catching and can be used as an accent color to draw attention to key elements like calls to action, links, or highlighted information. It's a vibrant choice that can add energy and dynamism to your design when used sparingly.
+- #104334 (Deep Teal Green): This dark, rich teal is both elegant and versatile. It can serve as an accent or secondary color, suitable for less dominant elements that still require visual interest, such as secondary buttons, icons, or background panels.
+- #0e122f (Dark Blue): Slightly lighter than #0c0c0e, this deep blue can be used to create a sense of depth and layering in your design. It works well for secondary backgrounds, sidebars, or for text that is important but doesn't need to stand out as much as the content in the primary color.
+
+<details>
+<summary><h4>Technologies Used</h4></summary>
+
+<details>
+<summary><h5>Languages, Frameworks, Databases</h5></summary>
+
+Languages
+- HTML
+- CSS
+- Javascript
+- Python
+
+Frameworks
+- Django
+
+Databases
+- Psycopg
+- Elephant SQL
+
+</details>
+
+<details>
+<summary><h5>Websites, Software & other Tools</h5></summary>
+
+- [Codeanywhere](https://codeanywhere.com/solutions/collaborate) This is was my IDE for the project.
+- [CodePen](codepen.io) I used this to test code outside of [Codeanywhere](https://codeanywhere.com/solutions/collaborate) so that I didn't use up hours unnecessarily. I also used it to find the right filter colour for my SVGs.
+- [Git](https://git-scm.com/) Used to commit and push code to [Github](https://github.com/).
+- [Github](https://github.com/) This was used as a remote repository and I also used Github pages to host the live site.
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) Used to learn and stick to a conventional commit framework.
+- [Midjourney](https://www.midjourney.com/) I used this AI tool for image generation.
+- [Photoshop](https://www.adobe.com/uk/products/photoshop.html) Used for Creating, Editing and resizing
+- [Illustrator](https://www.adobe.com/uk/products/illustrator.html) Used to create vectors from AI generated images and perosnally made images
+- [AdobeXD](https://helpx.adobe.com/support/xd.html) Used to create wireframes.
+- [Google Fonts](https://fonts.google.com/) Sourcing fonts.
+- [Color Space](http://colormind.io/) Used to create colour palette.
+- [Am I Responsive?](https://ui.dev/amiresponsive) Used to create mock-ups for various screen sizes.
+- [Dynamic Drive](http://tools.dynamicdrive.com/favicon/) Used to create favicon.
 
 </details>
