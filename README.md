@@ -299,8 +299,11 @@ Languages
 - Javascript
 - Python
 
+
 Frameworks
 - Django
+  - [DJ Databse](https://pypi.org/project/dj-database-url/)
+  - [Django SummerNote](https://summernote.org/)
 
 Databases
 - Psycopg
