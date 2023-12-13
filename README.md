@@ -146,4 +146,68 @@ Join Joystick Junction to be part of a dynamic community where your voice matter
 ![Joystick Junction Tradeoff Graph](/static/images/readme/uxd/strategy/joystick_junction_strategy_tradeoffs_graph.png)
 </details>
 
+
+<details>
+<summary><h3>Scope</h3></summary>
+
+#### Sprint 1 Features ####
+
+##### Must Have
+
+- Assign Roles and Permissions
+- Edit or Delete Violating Posts
+- Monitor Compliance
+- Sign-In with Username/Password
+- Streamlined Registration (First-Time Visitor)
+- Intuitive Interface
+- Access Game Information
+- Easy Site Navigation (First-Time Visitor)
+
+##### Should have
+
+- Manage User Accounts
+- Manage Categories and Subforums
+- Address Community Violations
+- Accessibility Features
+- Discover New Content (Frequent Visitor)
+
+##### Could have
+
+- Highlight Moderators (Frequent Visitor)
+- Handle Reported Content
+- Secure Authentication Methods
+- Social Network Sign-In
+- Participate in Community Discussions
+- View Game Reviews and Ratings
+
+#### Sprint 1 Requirement Types ####
+
+- Languages: HTML, CSS, JavaScript Python
+- Frameworks: Django
+- Database: Psycopg, Elephant SQL
+
+#### Future Sprint Features ####
+
+- Collect User Feedback
+- Generate Engagement Reports
+- Access User Activity Analytics
+- Control Profile Visibility
+- Create and Join Interest Groups
+- Follow Users and Developers
+- Personalise Forum Appearance
+- Customise Notifications
+- Add or Change Profile Image
+- Update Personal Information
+- Developer Updates (Returning Visitor)
+- Showcase New Games (Developer)
+- Developer Profile Creation
+- Resume Discussions (Returning Visitor)
+
+#### Future Sprint Requirement Types ####
+- Languages: HTML, CSS, JavaScript Python
+- Frameworks: Django
+- Database: Psycopg, Elephant SQL
+
+</details>
+
 </details>
