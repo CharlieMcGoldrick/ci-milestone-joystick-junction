@@ -1,6 +1,7 @@
 import requests
 from django.conf import settings
 
+
 def get_twitch_access_token():
     url = 'https://id.twitch.tv/oauth2/token'
     payload = {
@@ -13,3 +14,4 @@ def get_twitch_access_token():
         return response.json()['access_token']
     else:
         return None
+        
