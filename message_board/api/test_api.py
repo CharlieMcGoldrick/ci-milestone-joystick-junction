@@ -23,3 +23,13 @@ class GetTwitchAccessTokenTests(TestCase):
 
         token = get_twitch_access_token()
         self.assertIsNone(token)
+
+    @patch('requests.post')
+    def test_get_access_token_success(self, mock_post):
+        # Mocking a successful response from the Twitch API
+        mock_response = mock_post.return_value
+        mock_response.status_code = 200
+        mock_response.json.return_value = {'access_token': 'test_access_token'}
+
+        token = get_twitch_access_token()
+        self.assertEqual(token, 'test_access_token')
