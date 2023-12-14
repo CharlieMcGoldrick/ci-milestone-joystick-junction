@@ -13,12 +13,19 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-if os.path.isfile('env.py'):
-    import env
+
+development = os.environ.get('DEVELOPMENT', False)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+
+# Check if env.py exists and import it
+if os.path.isfile('env.py'):
+    import env
+
+# If  env.py then this is a development environment
+development = os.path.isfile('env.py')
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,12 +35,17 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = [
-    '8000-charliemcgoldrick-ci-ms4-h04io2ar4b.us2.codeanyapp.com',
-    'ci-ms4-joystick-junction-0cc6e816f0dd.herokuapp.com'
-]
+if development:
+    CSRF_TRUSTED_ORIGINS = ['https://*.codeanyapp.com']
+    DEBUG = True
+    ALLOWED_HOSTS = [
+        '8000-charliemcgoldrick-ci-ms4-h04io2ar4b.us2.codeanyapp.com'
+    ]
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = [
+        os.environ.get('ci-ms4-joystick-junction-0cc6e816f0dd.herokuapp.com')
+    ]
 
 
 # Application definition
@@ -91,8 +103,8 @@ WSGI_APPLICATION = 'joystick_junction.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-}
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
 
 
 # Password validation
