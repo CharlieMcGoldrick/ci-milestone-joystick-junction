@@ -3,6 +3,9 @@ from django.conf import settings
 
 
 def get_twitch_access_token():
+    """
+    This function retrieves an access token from Twitch for API authentication.
+    """
     url = 'https://id.twitch.tv/oauth2/token'
     payload = {
         'client_id': settings.TWITCH_CLIENT_ID,
@@ -17,6 +20,9 @@ def get_twitch_access_token():
 
 
 def make_igdb_api_request(endpoint, query_body):
+    """
+    This function makes a POST request to the IGDB API using the provided endpoint and query.
+    """
     access_token = get_twitch_access_token()
     if access_token is None:
         return None  # or handle the error as needed
