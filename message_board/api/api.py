@@ -14,4 +14,3 @@ def get_twitch_access_token():
         return response.json()['access_token']
     else:
         return None
-        
