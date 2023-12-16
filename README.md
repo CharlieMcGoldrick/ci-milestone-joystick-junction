@@ -225,43 +225,87 @@ Touchpoints - Responsive Website
 <details>
 <summary><h3>Wireframe - Desktop Homepage - Sprint 1</h3></summary>
 
-![Wireframe - Desktop Homepage](/static/images/readme/uxd/skeleton/1.wireframe_desktop_homepage_sprint1.png)
+![Wireframe - Desktop Homepage](/static/images/readme/uxd/skeleton/1.desktop-homepage-sprint1.png)
 
 </details>
 
 <details>
 <summary><h3>Wireframe - Desktop Game Page - About - Sprint 1</h3></summary>
 
-![Wireframe - Desktop Game Page - About](/static/images/readme/uxd/skeleton/2.wireframe_desktop_game-page_about-sprint1.png)
+![Wireframe - Desktop Game Page - About](/static/images/readme/uxd/skeleton/2.desktop-game_page-about-sprint1.png)
 
 </details>
 
 <details>
 <summary><h3>Wireframe - Desktop Game Page - Main thread and subthreads - Sprint 1</h3></summary>
 
-![Wireframe - Desktop Game Page - Main thread and subthreads](/static/images/readme/uxd/skeleton/3.wireframe_desktop_game-page_main-thread%20-and-subthreads_sprint1.png)
+The comment structure will be the same for the main thread and subthread.
+
+![Wireframe - Desktop Game Page - Main thread and subthreads](/static/images/readme/uxd/skeleton/3.desktop-game_page-main_thread_and_subthreads-sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Desktop Game Page - List of Subthreads - Sprint 1</h3></summary>
+
+![Wireframe - Desktop Game Page - List of Subthreads](/static/images/readme/uxd/skeleton/4.desktop-game_page-list_of_subthreads-sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Desktop Account Page - Register - Sprint 1</h3></summary>
+
+![Wireframe - Desktop Game Page - Register](/static/images/readme/uxd/skeleton/5.desktop-account_page-register-sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Desktop Account Page - Login - Sprint 1</h3></summary>
+
+![Wireframe - Desktop Game Page - Login](/static/images/readme/uxd/skeleton/6.desktop-account_page-login-sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Desktop Account Page - Regular User - Sprint 1</h3></summary>
+
+![Wireframe - Desktop Game Page - Register](/static/images/readme/uxd/skeleton/7.desktop-account_page-regular_user-sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Desktop Account Page - Admin User - Sprint 1</h3></summary>
+
+![Wireframe - Desktop Game Page - Admin User](/static/images/readme/uxd/skeleton/8.desktop-account_page-admin_user-sprint1.png)
 
 </details>
 
 <details>
 <summary><h3>Wireframe - Mobile Homepage - Sprint 1</h3></summary>
 
-![Wireframe - Mobile homepage](/static/images/readme/uxd/skeleton/4.wireframe_mobile_homepage1_sprint1.png)
-![Wireframe - Mobile homepage](/static/images/readme/uxd/skeleton/5.wireframe_mobile_homepage2_sprint1.png)
+![Wireframe - Mobile homepage](/static/images/readme/uxd/skeleton/9.mobile-homepage-sprint1.png)
+![Wireframe - Mobile homepage](/static/images/readme/uxd/skeleton/10.mobile-homepage-sprint1.png)
 
 </details>
 
 <details>
-<summary><h3>Wireframe - Mobile Homepage - Sprint 1</h3></summary>
+<summary><h3>Wireframe - Mobile Game Page - About - Sprint 1</h3></summary>
 
-![Wireframe - Mobile homepage - About](/static/images/readme/uxd/skeleton/6.wireframe_mobile_game-page-about_sprint1.png)
+![Wireframe - Mobile homepage - About](/static/images/readme/uxd/skeleton/11.mobile-game_page-about-sprint1.png)
 
 </details>
 
 <details>
-<summary><h3>Wireframe - Mobile Homepage - Sprint 1</h3></summary>
+<summary><h3>Wireframe - Mobile Game Page - Main thread and subthreads - Sprint 1</h3></summary>
 
-![Wireframe - Mobile homepage - Main thread and subthreads](/static/images/readme/uxd/skeleton/7.wireframe_mobile_game-page_main-thread-and-subthreads_sprint1.png)
+![Wireframe - Mobile homepage - Main thread and subthreads](/static/images/readme/uxd/skeleton/12.mobile-game_page-main_thread_and_subthreads-sprint1.png)
+
+</details>
+
+<details>
+<summary><h3>Wireframe - Mobile Game Page - Main thread and subthreads - Sprint 1</h3></summary>
+
+![Wireframe - Mobile homepage - Main thread and subthreads](/static/images/readme/uxd/skeleton/13.mobile-game_page-list_of_subthreads-sprint1.png)
 
 </details>
 </details>
