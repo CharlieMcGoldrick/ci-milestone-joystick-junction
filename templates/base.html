@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html class="h-100">
+<html lang="en" class="h-100">
 
 <head>
     <title>Joystick Junction</title>
@@ -43,12 +43,15 @@
             <a class="navbar-brand" href="{% url 'home' %}">Joystick Junction</a>
 
             <!-- Logo at the center -->
-            <a class="logo-container" href="{% url 'home' %}"></a>
+            <a class="logo-container" href="{% url 'home' %}">
+                <span class="hidden-accessibility">Company Logo</span>
+            </a>
 
             <!-- Account icon on the right -->
             <div class="d-flex justify-content-end">
                 <a class="navbar-brand" href="{% url 'account_management' %}">
                     <i class="fa-solid fa-user"></i>
+                    <span class="hidden-accessibility">Account Icon</span>
                 </a>
             </div>
         </div>
@@ -68,12 +71,15 @@
         <p class="m-0 text-center">Follow us:
             <a href="https://www.facebook.com/daidalos.design.studios" target="_blank" class="ms-3">
                 <i class="fab fa-facebook-square"></i>
+                <span class="hidden-accessibility">Facebook Icon</span>
             </a>
             <a href="https://twitter.com/daidalosdesign" target="_blank" class="ms-3">
                 <i class="fab fa-twitter-square"></i>
+                <span class="hidden-accessibility">Twitter Icon</span>
             </a>
             <a href="https://www.instagram.com/daidalos.design/" target="_blank" class="ms-3">
                 <i class="fab fa-instagram-square"></i>
+                <span class="hidden-accessibility">Instagram Icon</span>
             </a>
         </p>
     </footer>
