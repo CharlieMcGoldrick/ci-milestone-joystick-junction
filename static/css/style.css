@@ -52,6 +52,11 @@ p {
     padding: 0;
     border: 0;
 }
+
+/* Boostrap adjustments */
+.btn-primary {
+    background-color: var(--primary-accent-colour);
+}
 /* --------------- GLOBAL STYLING ENDS --------------- */
 
 /*--------------- GENERAL LINK STYLING STARTS ---------------*/
@@ -103,10 +108,32 @@ a:hover {
 
 
 /* --------------- ACCOUNT MANAGEMENT STYLING STARTS --------------- */
+.card {
+    background: radial-gradient(circle at top, #0E1230, #070817);
+    border: 1px solid var(--primary-accent-colour);
+}
+
+.nav-tabs .nav-link {
+    color: var(--secondary-colour);
+    border-color: var(--secondary-colour);
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--primary-accent-colour);
+    border-color: var(--primary-accent-colour);
+}
+
+.form-label {
+    color: var(--secondary-colour);
+}
+
+.form-control {
+    color: var(--primary-colour);
+    background-color: var(--secondary-colour);
+}
+
 .hidden-input {
     visibility: hidden;
 }
-
-
 /* --------------- ACCOUNT MANAGEMENT STYLING ENDS --------------- */
 
