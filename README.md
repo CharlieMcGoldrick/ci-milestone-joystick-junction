@@ -329,7 +329,7 @@ For the body text, I'm pairing it with Open Sans, another sans-serif font that c
 - **#ffffff (Pure White):** A classic and clean white that serves as the ideal background color, especially for creating strong contrasts with darker colors. Versatile, suitable for primary text, as well as user interface elements such as cards, buttons, and input fields, ensuring maximum readability and a crisp, clean appearance.
 - **#0E1230 (Dark Blue):** Slightly lighter than the primary color, this deep blue adds depth and layering to the design. Well-suited for secondary backgrounds, sidebars, or text that doesn't need to be as prominent as the content in the primary color.
 - **#070817 (Even Darker Blue):** This color adds depth and richness to the design, enhancing the visual appeal of secondary backgrounds and making them visually distinct from the primary background.
-- **2E74FF (Bright Blue)**: This bright and lively blue is eye-catching and can be used as an accent color to draw attention to key elements like calls to action, links, or highlighted information. It's a vibrant choice that can add energy and dynamism to a design when used sparingly.
+- **#1c67fd (Bright Blue)**: This bright and lively blue is eye-catching and can be used as an accent color to draw attention to key elements like calls to action, links, or highlighted information. It's a vibrant choice that can add energy and dynamism to a design when used sparingly.
 - **#104334 (Deep Teal Green):** A dark and rich teal, both elegant and versatile, serving as an accent or secondary color. Ideal for less dominant elements that still demand visual interest, such as secondary buttons, icons, or background panels.
 
 <details>
