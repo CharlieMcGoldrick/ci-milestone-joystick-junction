@@ -1,3 +1,14 @@
+/*--------------- COLOUR VARIABLES STARTS ---------------*/
+:root {
+    --primary-colour: #0c0c0e;
+    --secondary-colour: #ffffff;
+    --primary-background-colour: #0e122f;
+    --secondary-background-colour: #104334;
+    --accent-colour: #4250e4;
+}
+
+/*--------------- COLOUR VARIABLES ENDS ---------------*/
+
 /*--------------- RESET STYLING STARTS ---------------*/
 * {
     margin: 0;
