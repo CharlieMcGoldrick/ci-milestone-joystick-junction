@@ -41,18 +41,24 @@
                             <form>
                                 <div class="mb-3 mt-3">
                                     <label for="registerEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email here"
-                                        required>
+                                    <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email here" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="registerUsername" class="form-label">Username</label>
                                     <input type="text" class="form-control" id="registerUsername" minlength="3" maxlength="20"
                                         placeholder="Enter your username here" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="registerPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="registerPassword" minlength="8" maxlength="50"
-                                        pattern="(?=.*\d)(?=.*[!@#$%^&*]).*" placeholder="Enter your password here" required>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="registerPassword" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="registerPassword" name="password1" minlength="8" maxlength="50"
+                                            pattern="(?=.*\d)(?=.*[!@#$%^&*]).*" placeholder="Enter your password here" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="registerPassword2" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="registerPassword2" name="password2" minlength="8" maxlength="50"
+                                            pattern="(?=.*\d)(?=.*[!@#$%^&*]).*" placeholder="Enter your password again" required>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">Register</button>
                             </form>
