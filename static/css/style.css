@@ -99,3 +99,11 @@ a:hover {
     background-image: url('/static/images/joystick_junction_logo_hover_50x50.png');
 }
 /* --------------- NAVBAR STYLING ENDS --------------- */
+
+
+/* --------------- ACCOUNT MANAGEMENT STYLING STARTS --------------- */
+.hidden-input {
+    visibility: hidden;
+}
+/* --------------- ACCOUNT MANAGEMENT STYLING ENDS --------------- */
+
