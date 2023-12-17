@@ -2,9 +2,10 @@
 :root {
     --primary-colour: #0c0c0e;
     --secondary-colour: #ffffff;
+    --secondary-colour-hover: #d8d9e3;
     --primary-background-colour: #0e122f;
     --secondary-background-colour: #104334;
-    --accent-colour: #4250e4;
+    --accent-colour: 66, 80, 228;
 }
 
 /*--------------- COLOUR VARIABLES ENDS ---------------*/
@@ -39,4 +40,52 @@ h6 {
 p {
     line-height: 1.5;
 }
+
 /* --------------- GLOBAL STYLING ENDS --------------- */
+
+/*--------------- GENERAL LINK STYLING STARTS ---------------*/
+a,
+a:visited {
+    color: var(--secondary-colour);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--secondary-colour-hover);
+}
+
+/*--------------- GENERAL LINK STYLING ENDS ---------------*/
+
+/* --------------- NAVBAR STYLING STARTS --------------- */
+.navbar {
+    --bs-navbar-padding-y: 0;
+    position: relative;
+    border-bottom: 2px solid rgba(var(--accent-colour), 0.3);
+}
+
+.navbar .container-fluid {
+    height: 50px;
+}
+
+.navbar-brand {
+    color: var(--secondary-colour);
+}
+
+.navbar-brand:hover {
+    color: var(--secondary-colour-hover);
+}
+
+.logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 40px;
+    background: url('/static/images/joystick_junction_logo_50x50.png') no-repeat center/cover;
+}
+
+.logo-container:hover {
+    background-image: url('/static/images/joystick_junction_logo_hover_50x50.png');
+}
+/* --------------- NAVBAR STYLING ENDS --------------- */
