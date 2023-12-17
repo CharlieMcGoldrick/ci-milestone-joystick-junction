@@ -17,3 +17,26 @@
 }
 
 /*--------------- RESET STYLING ENDS ---------------*/
+
+/* --------------- GLOBAL STYLING STARTS --------------- */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--primary-colour);
+    color: var(--secondary-colour);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto Slab', serif;
+    line-height: 1;
+    font-weight: 600;
+}
+
+p {
+    line-height: 1.5;
+}
+/* --------------- GLOBAL STYLING ENDS --------------- */
