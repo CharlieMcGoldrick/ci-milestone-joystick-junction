@@ -325,11 +325,12 @@ For the body text, I'm pairing it with Open Sans, another sans-serif font that c
 
 ![Synaptic Surge Colour Swatch](static/images/readme/uxd/surface/joystick_junction_colour_swatch.png)
 
-- #0c0c0e (Very Dark Blue-Gray): This color is almost black but with a hint of blue, making it a sophisticated and strong choice for your primary color. It's ideal for key elements such as headers, footers, and primary backgrounds. It can also be used effectively for important text, offering a subtle alternative to pure black.
-- #ffffff (Pure White): This classic, clean color is perfect for backgrounds, especially to create a stark contrast with darker colors. It's also suitable for primary text and user interface elements like cards, buttons, and input fields, offering maximum readability and a crisp, clean look.
-- #4250e4 (Vivid Blue): This bright, lively blue is eye-catching and can be used as an accent color to draw attention to key elements like calls to action, links, or highlighted information. It's a vibrant choice that can add energy and dynamism to your design when used sparingly.
-- #104334 (Deep Teal Green): This dark, rich teal is both elegant and versatile. It can serve as an accent or secondary color, suitable for less dominant elements that still require visual interest, such as secondary buttons, icons, or background panels.
-- #0e122f (Dark Blue): Slightly lighter than #0c0c0e, this deep blue can be used to create a sense of depth and layering in your design. It works well for secondary backgrounds, sidebars, or for text that is important but doesn't need to stand out as much as the content in the primary color.
+- **#0c0c0e (Very Dark Blue-Gray):** This color is nearly black but carries a hint of blue, making it a sophisticated and robust choice for the primary color. It's perfect for headers, footers, primary backgrounds, and important text, offering a subtle alternative to pure black.
+- **#ffffff (Pure White):** A classic and clean white that serves as the ideal background color, especially for creating strong contrasts with darker colors. Versatile, suitable for primary text, as well as user interface elements such as cards, buttons, and input fields, ensuring maximum readability and a crisp, clean appearance.
+- **#0E1230 (Dark Blue):** Slightly lighter than the primary color, this deep blue adds depth and layering to the design. Well-suited for secondary backgrounds, sidebars, or text that doesn't need to be as prominent as the content in the primary color.
+- **#070817 (Even Darker Blue):** This color adds depth and richness to the design, enhancing the visual appeal of secondary backgrounds and making them visually distinct from the primary background.
+- **2E74FF (Bright Blue)**: This bright and lively blue is eye-catching and can be used as an accent color to draw attention to key elements like calls to action, links, or highlighted information. It's a vibrant choice that can add energy and dynamism to a design when used sparingly.
+- **#104334 (Deep Teal Green):** A dark and rich teal, both elegant and versatile, serving as an accent or secondary color. Ideal for less dominant elements that still demand visual interest, such as secondary buttons, icons, or background panels.
 
 <details>
 <summary><h4>Technologies Used</h4></summary>
