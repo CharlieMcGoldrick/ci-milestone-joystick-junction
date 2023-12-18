@@ -97,20 +97,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 .then(response => {
                     if (!response.ok) {
                         // Handle error
+                        toastBody.textContent = 'There was an error during the signup process. Please try again.';
+                        errorToast.show();
                         console.error('Error:', response.statusText);
                     } else {
                         // Handle success
-                        window.location.href = '/'; // Redirect to home page
+                        toastBody.textContent = 'Signup successful! Redirecting to home page...';
+                        errorToast.show();
+                        setTimeout(() => {
+                            window.location.href = '/'; // Redirect to home page
+                        }, 2000); // Redirect after 2 seconds
                     }
                 })
                 .catch(error => {
                     // Handle the error
+                    toastBody.textContent = 'There was an error during the signup process. Please try again.';
+                    errorToast.show();
                     console.error('Error:', error);
                 });
             }
         })
         .catch(error => {
             // Handle the error
+            toastBody.textContent = 'There was an error checking the username and email. Please try again.';
+            errorToast.show();
             console.error('Error:', error);
         });
     });
