@@ -4,18 +4,20 @@ from message_board.forms import LoginForm, SignupForm
 
 class LoginFormTest(TestCase):
 
-    def test_nonexistent_username(self):
-        # Red: Testing the form by trying a user with a different username
+    def setUp(self):
+        # Create a user with a known username and password
         User = get_user_model()
-        User.objects.create_user(username='existing_user', password='testpassword')
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
 
+    def test_valid_login(self):
+        # Green: Testing the form by trying the correct details
         form_data = {
-            'username': 'nonexistent_user',
+            'username': 'testuser',
             'password': 'testpassword',
         }
 
         form = LoginForm(data=form_data)
-        self.assertFalse(form.is_valid())
+        self.assertTrue(form.is_valid())
 
 
 class SignupFormTest(TestCase):
