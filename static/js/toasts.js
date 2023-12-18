@@ -1,3 +1,19 @@
+// Function to get a cookie by name
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 // Signup Form toasts
 document.addEventListener('DOMContentLoaded', (event) => {
     const signupForm = document.getElementById('signupForm');
@@ -45,7 +61,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken
+                'X-CSRFToken': getCookie('csrftoken')
             },
             body: JSON.stringify({
                 username: usernameInput.value,
