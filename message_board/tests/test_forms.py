@@ -22,13 +22,13 @@ class LoginFormTest(TestCase):
 
 class SignupFormTest(TestCase):
 
-    def test_signup_form_valid(self):
-        # Green: Testing the form with valid data
-        data = {
-            "username": "testuser",
-            "email": "testuser@example.com",
-            "password1": "password123?",
-            "password2": "password123?",
+    def test_valid_signup_form(self):
+        form_data = {
+            'username': 'testuser',
+            'email': 'testuser@example.com',
+            'password1': 'password123!',
+            'password2': 'password123!',
         }
-        form = SignupForm(data=data)
+
+        form = SignupForm(data=form_data)
         self.assertTrue(form.is_valid())
