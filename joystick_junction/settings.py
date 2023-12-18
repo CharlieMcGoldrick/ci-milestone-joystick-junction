@@ -44,7 +44,7 @@ if development:
 else:
     DEBUG = False
     ALLOWED_HOSTS = [
-        os.environ.get('ci-ms4-joystick-junction-0cc6e816f0dd.herokuapp.com')
+        'ci-ms4-joystick-junction-0cc6e816f0dd.herokuapp.com'
     ]
 
 
