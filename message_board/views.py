@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, SignupForm
 from django.http import JsonResponse
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 import json 
 
@@ -17,7 +17,17 @@ def account_management(request):
     if request.method == 'POST':
         if 'login' in request.POST:
             if login_form.is_valid():
-                return redirect('home')
+                username = login_form.cleaned_data.get('username')
+                password = login_form.cleaned_data.get('password')
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    print(request.user.is_authenticated)
+                    return redirect('home')
+                else:
+                    return JsonResponse({'error': 'Invalid username or password'}, status=400)
+            else:
+                return JsonResponse({'error': login_form.errors}, status=400)
         elif 'signup' in request.POST:
             if signup_form.is_valid():
                 user = signup_form.save()
@@ -29,7 +39,7 @@ def account_management(request):
                 return redirect('account_management')
             else:
                 return JsonResponse({'error': signup_form.errors}, status=400)
-
+    print(request.user.is_authenticated)
     return render(request, 'account_management.html', {'login_form': login_form, 'signup_form': signup_form})
 
 
