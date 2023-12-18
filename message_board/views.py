@@ -4,11 +4,18 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
+from .api.api import make_igdb_api_request
 import json 
 
 def home(request):
     template_name = "index.html"
     return render(request, template_name)
+
+def make_search_request(query):
+    endpoint = 'search'
+    query_body = f'fields *; search "{query}"; limit 50;'
+    return make_igdb_api_request(endpoint, query_body)
+
 
 # Account Management functions
 def account_management(request):
