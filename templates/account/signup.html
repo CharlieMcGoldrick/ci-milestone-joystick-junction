@@ -1,6 +1,7 @@
+{% load static %}
 {% load i18n %}
 {% block content %}
-<form method="post">
+<form id="signupForm" method="post">
     {% csrf_token %}
     <div class="mb-3 mt-3">
         <label for="signupEmail" class="form-label">Email</label>
@@ -27,4 +28,17 @@
     <input type="hidden" name="signup" value="true">
     <button type="submit" class="btn btn-primary w-100">Signup</button>
 </form>
+
+<!-- Error Toasts -->
+<div class="toast" id="errorToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong class="me-auto">Error</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body" id="toastBody">
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="{% static 'js/toasts.js' %}"></script>
 {% endblock content %}
