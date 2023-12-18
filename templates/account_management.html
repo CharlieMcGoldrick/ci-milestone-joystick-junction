@@ -10,6 +10,12 @@
                         <a class="nav-link active" id="account-tab" data-bs-toggle="tab" href="#account" role="tab"
                             aria-controls="account" aria-selected="true">Account</a>
                     </li>
+                    {% if user.is_superuser %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="superuser-tab" data-bs-toggle="tab" href="#superuser" role="tab"
+                            aria-controls="superuser" aria-selected="false">Superuser</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item" role="presentation">
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
@@ -23,8 +29,14 @@
                         <div class="mt-3">
                             <p>Username: {{ user.username }}</p>
                             <p>Email: {{ user.email }}</p>
+
                         </div>
                     </div>
+                    {% if user.is_superuser %}
+                    <div class="tab-pane fade" id="superuser" role="tabpanel" aria-labelledby="superuser-tab">
+                        {% include "superuser.html" %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

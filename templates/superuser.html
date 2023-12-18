@@ -1,0 +1,12 @@
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <form method="post" action="{% url 'promote_to_admin' %}">
+        {% csrf_token %}
+        <div class="mb-3 mt-3">
+            <label for="username" class="form-label">Enter a username to promote them to admin:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Promote to Admin</button>
+    </form>
+{% endblock content %}
