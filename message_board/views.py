@@ -1,5 +1,5 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from .forms import LoginForm, SignupForm 
 
 def home(request):
     template_name = "index.html"
@@ -7,5 +7,18 @@ def home(request):
 
 
 def account_management(request):
-    template_name = "account_management.html"
-    return render(request, template_name)
+    login_form = LoginForm(request.POST or None)
+    signup_form = SignupForm(request.POST or None)
+
+    if request.method == 'POST':
+        if 'login' in request.POST:
+            if login_form.is_valid():
+                # Log the user in and redirect to the home page
+                return redirect('home')
+        elif 'register' in request.POST:
+            if signup_form.is_valid():
+                # Register the user and reload the page
+                signup_form.save()
+                return redirect('account_management')
+
+    return render(request, 'account_management.html', {'login_form': login_form, 'signup_form': signup_form})
