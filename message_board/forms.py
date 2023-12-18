@@ -4,27 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 import re
 
-class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-
-    def clean(self):
-        cleaned_data = super().clean()
-        username = cleaned_data.get('username')
-        password = cleaned_data.get('password')
-
-        User = get_user_model()
-
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            raise forms.ValidationError("Username does not exist")
-
-        if not user.check_password(password):
-            raise forms.ValidationError("Incorrect password")
-
-        return cleaned_data
-
 class SignupForm(UserCreationForm):
     email = forms.EmailField()
     username = forms.CharField(min_length=3, max_length=20)

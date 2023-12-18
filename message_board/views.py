@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm, SignupForm
+from .forms import SignupForm
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
@@ -12,25 +12,6 @@ def home(request):
 # Account Management functions
 def account_management(request):
     return render(request, 'account_management.html')
-
-
-def login_view(request):
-    login_form = LoginForm(request.POST or None)
-
-    if request.method == 'POST':
-        if login_form.is_valid():
-            username = login_form.cleaned_data.get('username')
-            password = login_form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                return JsonResponse({'error': 'Invalid username or password'}, status=400)
-        else:
-            return JsonResponse({'error': login_form.errors}, status=400)
-
-    return render(request, 'login.html', {'login_form': login_form})
 
 
 def signup_view(request):
