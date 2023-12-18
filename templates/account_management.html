@@ -13,15 +13,15 @@
                             aria-controls="login" aria-selected="true">Login</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="register-tab" data-bs-toggle="tab" href="#register" role="tab"
-                            aria-controls="register" aria-selected="false">Register</a>
+                        <a class="nav-link" id="signup-tab" data-bs-toggle="tab" href="#signup" role="tab"
+                            aria-controls="signup" aria-selected="false">Signup</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="accountTabContent">
                     <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
                         {% include "account/login.html" %}
                     </div>
-                    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                    <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
                         {% include "account/signup.html" %}
                     </div>
                 </div>
