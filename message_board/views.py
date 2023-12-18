@@ -9,38 +9,47 @@ def home(request):
     template_name = "index.html"
     return render(request, template_name)
 
-
+# Account Management functions
 def account_management(request):
+    return render(request, 'account_management.html')
+
+
+def login_view(request):
     login_form = LoginForm(request.POST or None)
-    signup_form = SignupForm(request.POST or None)
 
     if request.method == 'POST':
-        if 'login' in request.POST:
-            if login_form.is_valid():
-                username = login_form.cleaned_data.get('username')
-                password = login_form.cleaned_data.get('password')
-                user = authenticate(request, username=username, password=password)
-                if user is not None:
-                    login(request, user)
-                    print(request.user.is_authenticated)
-                    return redirect('home')
-                else:
-                    return JsonResponse({'error': 'Invalid username or password'}, status=400)
+        if login_form.is_valid():
+            username = login_form.cleaned_data.get('username')
+            password = login_form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
             else:
-                return JsonResponse({'error': login_form.errors}, status=400)
-        elif 'signup' in request.POST:
-            if signup_form.is_valid():
-                user = signup_form.save()
-                
-                # Get or create the group
-                group, created = Group.objects.get_or_create(name='BasicUser')
-                group.user_set.add(user)
+                return JsonResponse({'error': 'Invalid username or password'}, status=400)
+        else:
+            return JsonResponse({'error': login_form.errors}, status=400)
 
-                return redirect('account_management')
-            else:
-                return JsonResponse({'error': signup_form.errors}, status=400)
-    print(request.user.is_authenticated)
-    return render(request, 'account_management.html', {'login_form': login_form, 'signup_form': signup_form})
+    return render(request, 'login.html', {'login_form': login_form})
+
+
+def signup_view(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        signup_form = SignupForm(data)
+
+        if signup_form.is_valid():
+            user = signup_form.save()
+            group, created = Group.objects.get_or_create(name='BasicUser')
+            group.user_set.add(user)
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'error': signup_form.errors}, status=400)
+
+    else:
+        signup_form = SignupForm()
+
+    return render(request, 'signup.html', {'signup_form': signup_form})
 
 
 def check_username_email(request):
@@ -69,4 +78,4 @@ def custom_error_500(request):
     return render(request, '500.html', {}, status=500)
 
 def custom_error_403(request, exception):
-    return render(request, '403.html', {}, status=403) 
+    return render(request, '403.html', {}, status=403)
