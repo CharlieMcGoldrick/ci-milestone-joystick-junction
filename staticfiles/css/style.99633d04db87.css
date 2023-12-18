@@ -1,0 +1,139 @@
+/*--------------- COLOUR VARIABLES STARTS ---------------*/
+:root {
+    --primary-colour: #0c0c0e;
+    --secondary-colour: #ffffff;
+    --primary-background-colour: #0E1230;
+    --secondary-background-colour: #070817;
+    --primary-accent-colour: #1c67fd;
+    --secondary-accent-colour: #104334;
+}
+
+/*--------------- COLOUR VARIABLES ENDS ---------------*/
+
+/*--------------- RESET STYLING STARTS ---------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*--------------- RESET STYLING ENDS ---------------*/
+
+/* --------------- GLOBAL STYLING STARTS --------------- */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--primary-colour);
+    color: var(--secondary-colour);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto Slab', serif;
+    line-height: 1;
+    font-weight: 600;
+}
+
+p {
+    line-height: 1.5;
+    color: var(--secondary-colour);
+}
+
+.hidden-accessibility {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+}
+
+/* Boostrap adjustments */
+.btn-primary {
+    background-color: var(--primary-accent-colour);
+}
+/* --------------- GLOBAL STYLING ENDS --------------- */
+
+/*--------------- GENERAL LINK STYLING STARTS ---------------*/
+a,
+a:visited {
+    color: var(--secondary-colour);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--primary-accent-colour);
+}
+
+/*--------------- GENERAL LINK STYLING ENDS ---------------*/
+
+/* --------------- NAVBAR STYLING STARTS --------------- */
+.navbar {
+    --bs-navbar-padding-y: 0;
+    position: relative;
+    border-bottom: 2px solid var(--primary-accent-colour);
+}
+
+.navbar .container-fluid {
+    height: 50px;
+}
+
+.navbar-brand {
+    color: var(--secondary-colour);
+}
+
+.navbar-brand:hover {
+    color: var(--primary-accent-colour);
+}
+
+.logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 40px;
+    background: url("/static/images/joystick_junction_logo_50x50.88a90ca5399f.png") no-repeat center/cover;
+}
+
+.logo-container:hover {
+    background-image: url("/static/images/joystick_junction_logo_hover_50x50.7e738c9f7e3b.png");
+}
+/* --------------- NAVBAR STYLING ENDS --------------- */
+
+
+/* --------------- ACCOUNT MANAGEMENT STYLING STARTS --------------- */
+.card {
+    background: radial-gradient(circle at top, #0E1230, #070817);
+    border: 1px solid var(--primary-accent-colour);
+}
+
+.nav-tabs .nav-link {
+    color: var(--secondary-colour);
+    border-color: var(--secondary-colour);
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--primary-accent-colour);
+    border-color: var(--primary-accent-colour);
+}
+
+.form-label {
+    color: var(--secondary-colour);
+}
+
+.form-control {
+    color: var(--primary-colour);
+    background-color: var(--secondary-colour);
+}
+
+.hidden-input {
+    visibility: hidden;
+}
+/* --------------- ACCOUNT MANAGEMENT STYLING ENDS --------------- */
+
