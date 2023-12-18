@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, SignupForm
 from django.http import JsonResponse
+from django.contrib.auth import logout
 from django.contrib.auth.models import User, Group
 import json 
 
@@ -43,6 +44,11 @@ def check_username_email(request):
     }
 
     return JsonResponse(data)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 # Error views
