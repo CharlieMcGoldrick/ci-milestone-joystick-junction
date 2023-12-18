@@ -57,7 +57,7 @@ def make_igdb_api_request(endpoint, query_body):
         return None
 
     # Construct the full URL for the IGDB API request
-    url = f'https://api.igdb.com/v4/{endpoint}'
+    url = f'https://api.igdb.com/v4/games'
 
     # Headers including Client-ID and Authorization token
     headers = {

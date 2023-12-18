@@ -12,7 +12,7 @@ def home(request):
     return render(request, template_name)
 
 def make_search_request(query):
-    endpoint = 'search'
+    endpoint = 'games'
     query_body = f'fields *; search "{query}"; limit 50;'
     return make_igdb_api_request(endpoint, query_body)
 
