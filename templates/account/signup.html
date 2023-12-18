@@ -1,32 +1,29 @@
-{% extends "account/base_entrance.html" %}
-{% load allauth i18n socialaccount %}
-{% block head_title %}
-    {% trans "Signup" %}
-{% endblock head_title %}
+{% load i18n %}
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    <p>
-        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
-    </p>
-    {% url 'account_signup' as action_url %}
-    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {% if redirect_field_value %}
-                <input type="hidden"
-                       name="{{ redirect_field_name }}"
-                       value="{{ redirect_field_value }}" />
-            {% endif %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button tags="prominent,signup" type="submit" %}
-                {% trans "Sign Up" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3 mt-3">
+        <label for="signupEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="signupEmail" name="{{ signup_form.email.name }}"
+            placeholder="Enter your email here" required>
+    </div>
+    <div class="mb-3">
+        <label for="signupUsername" class="form-label">Username</label>
+        <input type="text" class="form-control" id="signupUsername" name="{{ signup_form.username.name }}"
+            placeholder="Enter your username here" required>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="signupPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="signupPassword" name="{{ signup_form.password1.name }}"
+                placeholder="Enter your password here" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="signupPassword2" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="signupPassword2" name="{{ signup_form.password2.name }}"
+                placeholder="Enter your password again" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Signup</button>
+</form>
 {% endblock content %}
