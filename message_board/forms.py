@@ -34,6 +34,18 @@ class SignupForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("Username is already taken.")
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Email is already in use.")
+        return email
+
     def clean_password1(self):
         password = self.cleaned_data.get('password1')
         if not re.search(r'\d', password) or not re.search(r'[!@#$%^&*]', password):
