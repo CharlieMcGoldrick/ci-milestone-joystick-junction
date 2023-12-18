@@ -1,6 +1,6 @@
 {% load i18n %}
 {% block content %}
-<form method="post" action="{% url 'account_management' %}">
+<form method="post" action="{% url 'login_view' %}">
     {% csrf_token %}
     <div class="mb-3 mt-3">
         <label for="loginUsername" class="form-label">Username</label>
@@ -12,9 +12,7 @@
         <input type="password" class="form-control" id="loginPassword" name="{{ form.password.name }}" minlength="8"
             maxlength="50" pattern="(?=.*\d)(?=.*[!@#$%^&*]).*" placeholder="Enter your password here" required>
     </div>
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
+    <input type="hidden" name="login" value="true">
     <button type="submit" class="btn btn-primary w-100">{% trans "Sign In" %}</button>
 </form>
 {% endblock content %}
