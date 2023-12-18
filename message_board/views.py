@@ -44,3 +44,13 @@ def check_username_email(request):
 
     return JsonResponse(data)
 
+
+# Error views
+def custom_error_404(request, exception):
+    return render(request, '404.html', {}, status=404)
+
+def custom_error_500(request):
+    return render(request, '500.html', {}, status=500)
+
+def custom_error_403(request, exception):
+    return render(request, '403.html', {}, status=403) 
