@@ -19,7 +19,13 @@ def make_search_request(query):
 
 # Account Management functions
 def account_management(request):
-    return render(request, 'account_management.html')
+    results = None
+    form_submitted = False
+    if request.method == 'POST':
+        query = request.POST.get('query')
+        results = make_search_request(query)
+        form_submitted = True
+    return render(request, 'account_management.html', {'results': results, 'form_submitted': form_submitted})
 
 
 def signup_view(request):
