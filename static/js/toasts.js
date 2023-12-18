@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const toastBody = document.getElementById('toastBody');
 
     signupForm.addEventListener('submit', function (event) {
+        console.log('Form submission prevented');
         event.preventDefault(); // Prevent form from submitting immediately
 
         // Check if the username is between 3 and 20 characters
@@ -61,25 +62,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
             },
             body: JSON.stringify({
                 username: usernameInput.value,
                 email: emailInput.value
             })
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.username_taken) {
-                    toastBody.textContent = 'Username is already taken.';
-                    errorToast.show();
-                } else if (data.email_taken) {
-                    toastBody.textContent = 'Email is already taken.';
-                    errorToast.show();
-                } else {
-                    // If username and email are not taken, submit the form
-                    signupForm.submit();
-                }
-            });
+        .then(response => response.json())
+        .then(data => {
+            if (data.username_taken) {
+                toastBody.textContent = 'Username is already taken.';
+                errorToast.show();
+            } else if (data.email_taken) {
+                toastBody.textContent = 'Email is already taken.';
+                errorToast.show();
+            } else {
+                // If username and email are not taken, submit the form
+                console.log('Submitting form');
+                signupForm.submit();
+            }
+        })
+        .catch(error => {
+            // Handle the error
+            console.error('Error:', error);
+        });
     });
 });

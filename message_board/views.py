@@ -23,6 +23,9 @@ def account_management(request):
                 # Signup the user and reload the page
                 signup_form.save()
                 return redirect('account_management')
+            else:
+                # Return an error message
+                return JsonResponse({'error': signup_form.errors}, status=400)
 
     return render(request, 'account_management.html', {'login_form': login_form, 'signup_form': signup_form})
 
