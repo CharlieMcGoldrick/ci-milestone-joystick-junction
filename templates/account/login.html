@@ -1,6 +1,6 @@
 {% load i18n %}
 {% block content %}
-<form method="post" action="{% url 'account_login' %}">
+<form method="post" action="{% url 'account_management' %}">
     {% csrf_token %}
     <div class="mb-3 mt-3">
         <label for="loginUsername" class="form-label">Username</label>
