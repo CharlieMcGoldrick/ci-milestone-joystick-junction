@@ -81,7 +81,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 errorToast.show();
             } else {
                 // If username and email are not taken, submit the form
-                signupForm.submit();
+                fetch('/signup/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: JSON.stringify({
+                        username: usernameInput.value,
+                        email: emailInput.value,
+                        password1: password1Input.value,
+                        password2: password2Input.value
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        // Handle error
+                        console.error('Error:', response.statusText);
+                    } else {
+                        // Handle success
+                        window.location.href = '/'; // Redirect to home page
+                    }
+                })
+                .catch(error => {
+                    // Handle the error
+                    console.error('Error:', error);
+                });
             }
         })
         .catch(error => {
