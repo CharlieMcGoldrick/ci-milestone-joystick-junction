@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const toastBody = document.getElementById('toastBody');
 
     signupForm.addEventListener('submit', function (event) {
-        console.log('Form submission prevented');
         event.preventDefault(); // Prevent form from submitting immediately
 
         // Check if the username is between 3 and 20 characters
@@ -79,7 +78,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 errorToast.show();
             } else {
                 // If username and email are not taken, submit the form
-                console.log('Submitting form');
                 signupForm.submit();
             }
         })

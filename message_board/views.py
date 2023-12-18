@@ -16,15 +16,12 @@ def account_management(request):
     if request.method == 'POST':
         if 'login' in request.POST:
             if login_form.is_valid():
-                # Log the user in and redirect to the home page
                 return redirect('home')
         elif 'signup' in request.POST:
             if signup_form.is_valid():
-                # Signup the user and reload the page
                 signup_form.save()
                 return redirect('account_management')
             else:
-                # Return an error message
                 return JsonResponse({'error': signup_form.errors}, status=400)
 
     return render(request, 'account_management.html', {'login_form': login_form, 'signup_form': signup_form})
