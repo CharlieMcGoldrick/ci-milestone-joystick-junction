@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+handler404 = 'message_board.views.custom_error_404'
+handler500 = 'message_board.views.custom_error_500'
+handler403 = 'message_board.views.custom_error_403'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('message_board.urls')),
