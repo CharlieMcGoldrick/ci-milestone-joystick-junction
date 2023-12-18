@@ -1,33 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
-    <main class="vh-100 d-flex align-items-center justify-content-center">
-        <div class="container">
-            {% if user.is_authenticated %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <ul class="nav nav-tabs" id="accountTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login" role="tab"
-                                aria-controls="login" aria-selected="true">Login</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="signup-tab" data-bs-toggle="tab" href="#signup" role="tab"
-                                aria-controls="signup" aria-selected="false">Signup</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="accountTabContent">
-                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                            {% include "account/login.html" %}
-                        </div>
-                        <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
-                            {% include "account/signup.html" %}
-                        </div>
+<main class="vh-100 d-flex align-items-center justify-content-center">
+    <div class="container">
+        {% if user.is_authenticated %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="accountTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="account-tab" data-bs-toggle="tab" href="#account" role="tab"
+                            aria-controls="account" aria-selected="true">Account</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link" id="logout-tab" role="tab" aria-controls="logout"
+                                aria-selected="false">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+                <div class="tab-content" id="accountTabContent">
+                    <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                        <h3>Account Information</h3>
+                        <p>Username: {{ user.username }}</p>
+                        <p>Email: {{ user.email }}</p>
                     </div>
                 </div>
             </div>
-            {% else %}
-            <!-- Other content goes here -->
-            {% endif %}
         </div>
-    </main>
+        {% else %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="accountTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login" role="tab"
+                            aria-controls="login" aria-selected="true">Login</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="signup-tab" data-bs-toggle="tab" href="#signup" role="tab"
+                            aria-controls="signup" aria-selected="false">Signup</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="accountTabContent">
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        {% include "account/login.html" %}
+                    </div>
+                    <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                        {% include "account/signup.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
 {% endblock %}
