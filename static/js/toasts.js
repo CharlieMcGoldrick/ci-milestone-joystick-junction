@@ -56,12 +56,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
             return;
         }
 
+        // Get the CSRF token
+        const csrftoken = getCookie('csrftoken');
+
         // Check if the username or email is already taken
         fetch('/check_username_email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                'X-CSRFToken': csrftoken
             },
             body: JSON.stringify({
                 username: usernameInput.value,
