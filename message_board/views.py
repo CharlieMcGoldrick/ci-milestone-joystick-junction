@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, SignupForm
 from django.http import JsonResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 import json 
 
 def home(request):
@@ -19,7 +19,12 @@ def account_management(request):
                 return redirect('home')
         elif 'signup' in request.POST:
             if signup_form.is_valid():
-                signup_form.save()
+                user = signup_form.save()
+                
+                # Get or create the group
+                group, created = Group.objects.get_or_create(name='BasicUser')
+                group.user_set.add(user)
+
                 return redirect('account_management')
             else:
                 return JsonResponse({'error': signup_form.errors}, status=400)
