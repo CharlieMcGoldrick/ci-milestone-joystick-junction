@@ -3,6 +3,7 @@ from .forms import SignupForm
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import login_required, user_passes_test
 import json 
 
 def home(request):
@@ -44,6 +45,22 @@ def check_username_email(request):
     }
 
     return JsonResponse(data)
+
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def promote_to_admin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        user = User.objects.filter(username=username, groups__name='BasicUser').first()
+        if user:
+            user.is_staff = True
+            user.save()
+            return redirect('account_management')
+        else:
+            # Handle case where user does not exist or is not in BasicUser group
+            pass
+    return redirect('account_management')
 
 
 def logout_view(request):
