@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -63,6 +64,13 @@ INSTALLED_APPS = [
     'django_summernote',
     'message_board',
 ]
+
+
+SITE_ID = 1
+
+# Redirects
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -164,6 +172,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Twitch variables to get IGDB API
 TWITCH_CLIENT_ID = os.environ.get('TWITCH_CLIENT_ID')
 TWITCH_CLIENT_SECRET = os.environ.get('TWITCH_CLIENT_SECRET')
-
-# Redirects
-LOGIN_REDIRECT_URL = 'home'
