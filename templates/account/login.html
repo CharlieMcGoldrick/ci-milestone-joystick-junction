@@ -1,18 +1,15 @@
 {% load i18n %}
 {% block content %}
-<form method="post" action="{% url 'login_view' %}">
-    {% csrf_token %}
-    <div class="mb-3 mt-3">
-        <label for="loginUsername" class="form-label">Username</label>
-        <input type="text" class="form-control" id="loginUsername" name="{{ form.username.name }}" minlength="3"
-            maxlength="20" placeholder="Enter your username here" required>
-    </div>
-    <div class="mb-3">
-        <label for="loginPassword" class="form-label">Password</label>
-        <input type="password" class="form-control" id="loginPassword" name="{{ form.password.name }}" minlength="8"
-            maxlength="50" pattern="(?=.*\d)(?=.*[!@#$%^&*]).*" placeholder="Enter your password here" required>
-    </div>
-    <input type="hidden" name="login" value="true">
-    <button type="submit" class="btn btn-primary w-100">{% trans "Sign In" %}</button>
-</form>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="my-3">
+            <label for="id_username" class="form-label">Username:</label>
+            <input type="text" class="form-control" name="username" id="id_username">
+        </div>
+        <div class="mb-3">
+            <label for="id_password" class="form-label">Password:</label>
+            <input type="password" class="form-control" name="password" id="id_password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
 {% endblock content %}
