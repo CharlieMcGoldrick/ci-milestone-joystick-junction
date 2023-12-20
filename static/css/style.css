@@ -137,3 +137,33 @@ a:hover {
 }
 /* --------------- ACCOUNT MANAGEMENT STYLING ENDS --------------- */
 
+/* --------------- ADMIN STYLING STARTS --------------- */
+.first-result-item {
+    margin-top: 20px;
+}
+
+.result-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.result-item {
+    margin-bottom: 1rem;
+}
+
+.result-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: var(--primary-colour);
+    background-color: var(--secondary-colour);
+    border: 1px solid var(--primary-accent-colour);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.result-button:hover {
+    color: var(--secondary-colour);
+    background-color: var(--primary-accent-colour);
+}
+/* --------------- ADMIN STYLING ENDS --------------- */
