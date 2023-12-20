@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm
+from .models import MainThread
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
@@ -15,6 +16,11 @@ def make_search_request(query):
     endpoint = 'games'
     query_body = f'fields *; search "{query}"; limit 50;'
     return make_igdb_api_request(endpoint, query_body)
+
+def create_game_main_thread(request, game_id):
+    game_name = request.POST.get('game_name')
+    game = MainThread.objects.create(name=game_name, game_id=game_id)
+    return redirect('account_management')
 
 
 # Account Management functions
