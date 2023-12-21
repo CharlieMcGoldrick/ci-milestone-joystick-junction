@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm
 from .models import MainThread
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -20,7 +21,7 @@ def make_main_thread_search_request(query):
 def create_game_main_thread(request, game_id):
     game_name = request.POST.get('game_name')
     game = MainThread.objects.create(name=game_name, game_id=game_id)
-    return redirect('account_management')
+    return HttpResponseRedirect(reverse('account_management'))
 
 
 # Account Management functions
