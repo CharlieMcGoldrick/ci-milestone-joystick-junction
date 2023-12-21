@@ -1,3 +1,6 @@
+/* Import fonts  */
+@import url('fonts.css');
+
 /*--------------- COLOUR VARIABLES STARTS ---------------*/
 :root {
     --primary-colour: #0c0c0e;
