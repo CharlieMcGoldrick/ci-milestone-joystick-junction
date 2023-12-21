@@ -12,9 +12,9 @@ def home(request):
     template_name = "index.html"
     return render(request, template_name)
 
-def make_search_request(query):
+def make_main_thread_search_request(query):
     endpoint = 'games'
-    query_body = f'fields *; search "{query}"; limit 50;'
+    query_body = f'fields *; where (category = 0 | category = 10) & version_title = null; search "{query}"; limit 10;'
     return make_igdb_api_request(endpoint, query_body)
 
 def create_game_main_thread(request, game_id):
@@ -29,7 +29,7 @@ def account_management(request):
     form_submitted = False
     if request.method == 'POST':
         query = request.POST.get('query')
-        results = make_search_request(query)
+        results = make_main_thread_search_request(query)
         form_submitted = True
     return render(request, 'account_management.html', {'results': results, 'form_submitted': form_submitted})
 
