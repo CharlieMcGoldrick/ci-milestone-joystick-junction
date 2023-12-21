@@ -166,4 +166,9 @@ a:hover {
     color: var(--secondary-colour);
     background-color: var(--primary-accent-colour);
 }
+
+#adminTabs.nav-tabs {
+    border-bottom: unset;
+    --bs-nav-tabs-border-radius: unset;
+}
 /* --------------- ADMIN STYLING ENDS --------------- */
