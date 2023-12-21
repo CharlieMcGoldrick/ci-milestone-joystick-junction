@@ -28,11 +28,12 @@ def create_game_main_thread(request, game_id):
 def account_management(request):
     results = None
     form_submitted = False
+    threads = MainThread.objects.all()  # Get all MainThread objects
     if request.method == 'POST':
         query = request.POST.get('query')
         results = make_main_thread_search_request(query)
         form_submitted = True
-    return render(request, 'account_management.html', {'results': results, 'form_submitted': form_submitted})
+    return render(request, 'account_management.html', {'results': results, 'form_submitted': form_submitted, 'threads': threads})
 
 
 def signup_view(request):
