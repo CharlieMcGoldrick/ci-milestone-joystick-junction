@@ -1,7 +1,15 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-    {% for thread in threads %}
-    <p>{{ thread.name }}</p>
-    {% endfor %}
+    <form id="searchForm" data-url="{% url 'search_created_main_threads' %}" method="get">
+        <div class="mb-3"></div>
+            <input type="text" class="form-control" name="search" placeholder="Search threads">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+    <div id="threadList">
+        {% for thread in threads %}
+        <p>{{ thread.name }}</p>
+        {% endfor %}
+    </div>
 {% endblock content %}

@@ -23,12 +23,18 @@ def create_game_main_thread(request, game_id):
     game = MainThread.objects.create(name=game_name, game_id=game_id)
     return HttpResponseRedirect(reverse('account_management'))
 
+def search_created_main_threads(request):
+    search_query = request.GET.get('search', '')
+    threads = MainThread.objects.filter(name__icontains=search_query)
+    thread_list = list(threads.values('name'))  # Convert QuerySet to list of dicts
+    return JsonResponse(thread_list, safe=False)
 
 # Account Management functions
 def account_management(request):
     results = None
     form_submitted = False
-    threads = MainThread.objects.all()  # Get all MainThread objects
+    search_query = request.GET.get('search', '')  # Get the search query
+    threads = MainThread.objects.filter(name__icontains=search_query)  # Filter threads based on the search query
     if request.method == 'POST':
         query = request.POST.get('query')
         results = make_main_thread_search_request(query)
