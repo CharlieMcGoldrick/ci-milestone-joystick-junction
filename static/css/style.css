@@ -141,17 +141,21 @@ a:hover {
 /* --------------- ACCOUNT MANAGEMENT STYLING ENDS --------------- */
 
 /* --------------- ADMIN STYLING STARTS --------------- */
-.first-result-item {
-    margin-top: 20px;
+#adminTabs.nav-tabs {
+    border-bottom: unset;
+    --bs-nav-tabs-border-radius: unset;
 }
 
-.result-list {
-    list-style-type: none;
-    padding-left: 0;
+#findAGameTab .search-button,
+#searchFormMainThread .search-button {
+    color: var(--secondary-colour);
+    background-color: var(--primary-accent-colour);
 }
 
-.result-item {
-    margin-bottom: 1rem;
+#findAGameTab .search-button:hover,
+#searchFormMainThread .search-button:hover {
+    background-color: var(--primary-accent-colour);
+    border-color: var(--secondary-colour);
 }
 
 .result-button {
@@ -167,11 +171,24 @@ a:hover {
 
 .result-button:hover {
     color: var(--secondary-colour);
-    background-color: var(--primary-accent-colour);
+    background-color: var(--primary-colour-hover);
+    border-color: var(--secondary-colour);
 }
 
-#adminTabs.nav-tabs {
-    border-bottom: unset;
-    --bs-nav-tabs-border-radius: unset;
+#searchGamesForMainThread li {
+    list-style-type: none;
+}
+
+.first-result-item {
+    margin-top: 1rem;
+}
+
+.result-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.result-item {
+    margin-bottom: 1rem;
 }
 /* --------------- ADMIN STYLING ENDS --------------- */
