@@ -18,6 +18,11 @@ def make_main_thread_search_request(query):
     query_body = f'fields *; where (category = 0 | category = 10) & version_title = null; search "{query}"; limit 10;'
     return make_igdb_api_request(endpoint, query_body)
 
+def search_games_for_main_thread(request):
+    search_query = request.GET.get('query', '')
+    results = make_main_thread_search_request(search_query)
+    return JsonResponse(results, safe=False)
+
 def create_game_main_thread(request, game_id):
     game_name = request.POST.get('game_name')
     game = MainThread.objects.create(name=game_name, game_id=game_id)
@@ -33,13 +38,7 @@ def search_created_main_threads(request):
 def account_management(request):
     results = None
     form_submitted = False
-    search_query = request.GET.get('search', '')  # Get the search query
-    threads = MainThread.objects.filter(name__icontains=search_query)  # Filter threads based on the search query
-    if request.method == 'POST':
-        query = request.POST.get('query')
-        results = make_main_thread_search_request(query)
-        form_submitted = True
-    return render(request, 'account_management.html', {'results': results, 'form_submitted': form_submitted, 'threads': threads})
+    return render(request, 'account_management.html')
 
 
 def signup_view(request):
