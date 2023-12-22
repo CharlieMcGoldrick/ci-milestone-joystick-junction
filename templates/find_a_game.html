@@ -1,31 +1,18 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-<div class="find-a-game-tab">
-    <form method="post" action="{% url 'account_management' %}">
+<div id="findAGameTab">
+    <form id="searchFormFindGame" data-url="{% url 'search_games_for_main_thread' %}">
         {% csrf_token %}
-        <input type="hidden" name="form_submitted" value="true">
         <div class="mb-3">
             <label for="query" class="form-label"></label>
             <input type="text" class="form-control" id="query" name="query" required>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Search</button>
+        <button type="submit" class="btn search-button w-100">Search</button>
     </form>
 
-    {% if results %}
-    <ul class="result-list">
-        {% for result in results %}
-        <li class="mb-2 result-item {% if forloop.first %}first-result-item{% endif %}">
-            <form method="post" action="{% url 'create_game_main_thread' result.id %}">
-                {% csrf_token %}
-                <input type="hidden" name="game_name" value="{{ result.name }}">
-                <button type="submit" class="result-button">
-                    Create {{ result.name }} main thread
-                </button>
-            </form>
-        </li>
-        {% endfor %}
-    </ul>
+    <div id="searchGamesForMainThread">
+        <!-- The results will be appended here by the AJAX success function -->
+    </div>
 </div>
-{% endif %}
 {% endblock content %}

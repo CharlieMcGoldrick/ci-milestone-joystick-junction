@@ -1,17 +1,14 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-    <form id="searchForm" data-url="{% url 'search_created_main_threads' %}" method="get">
-        <div class="mb-3"></div>
+    <form id="searchFormMainThread" data-url="{% url 'search_created_main_threads' %}" method="get">
+        <div class="mb-3">
+            <label for="query" class="form-label"></label>
             <input type="text" class="form-control" name="search" placeholder="Search threads">
-            <button type="submit" class="btn btn-primary w-100">Search</button>
         </div>
+        <button type="submit" class="btn search-button w-100">Search</button>
     </form>
-    <div id="threadList">
-        {% for thread in threads %}
-        <p>{{ thread.name }}</p>
-        {% endfor %}
+    <div id="searchCreatedMainThreads">
+        <!-- The results will be appended here by the AJAX success function -->
     </div>
-<!-- Scripts -->
-<script src="{% static 'js/main_thread_editor.js' %}"></script
 {% endblock content %}
