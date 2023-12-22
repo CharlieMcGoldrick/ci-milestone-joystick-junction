@@ -1,16 +1,45 @@
 $(document).ready(function () {
-    $('#searchForm').on('submit', function (e) {
+    $('#searchFormFindGame').on('submit', function (e) {
         e.preventDefault();
-        var url = $(this).data('url');  // Get the URL from the data attribute
+
         $.ajax({
-            url: url,
+            // Access the URL from the data attribute
+            url: $(this).data('url'),
             data: $(this).serialize(),
-            dataType: 'json',
             success: function (data) {
-                var threadList = $('#threadList');
-                threadList.empty();
-                $.each(data, function (index, thread) {
-                    threadList.append('<p>' + thread.name + '</p>');
+                var searchGamesForMainThread = $('#searchGamesForMainThread');
+                searchGamesForMainThread.empty();
+
+                $.each(data, function (i, game) {
+                    var listItem = $('<li>').addClass('result-item');
+                    if (i === 0) {
+                        listItem.addClass('first-result-item');
+                    }
+
+                    var form = $('<form>').attr('method', 'post').attr('action', "{% url 'create_game_main_thread' 'id_placeholder' %}".replace('id_placeholder', game.id));
+                    form.append($('<input>').attr('type', 'hidden').attr('name', 'game_name').val(game.name));
+                    form.append($('<button>').addClass('result-button btn btn-primary w-100').text('Create Main Thread ' + game.name));
+
+                    listItem.append(form);
+                    searchGamesForMainThread.append(listItem);
+                });
+            }
+        });
+    });
+
+    $('#searchFormMainThread').on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            // Access the URL from the data attribute
+            url: $(this).data('url'),
+            data: $(this).serialize(),
+            success: function (data) {
+                var searchCreatedMainThreads = $('#searchCreatedMainThreads');
+                searchCreatedMainThreads.empty();
+
+                $.each(data, function (i, thread) {
+                    searchCreatedMainThreads.append('<p>' + thread.name + '</p>');
                 });
             }
         });
