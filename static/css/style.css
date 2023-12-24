@@ -215,4 +215,15 @@ a:hover {
     background-color: var(--primary-colour);
     border-color: var(--secondary-colour);
 }
+
+#searchCreatedMainThreads .delete-button {
+    color: var(--secondary-colour);
+    border-color: var(--secondary-colour);
+}
+
+#searchCreatedMainThreads .delete-button:hover {
+    color: var(--primary-colour);
+    background-color: var(--secondary-colour);
+    border-color: var(--primary-accent-colour);
+}
 /* --------------- ADMIN STYLING ENDS --------------- */
