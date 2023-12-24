@@ -111,6 +111,10 @@ a:hover {
 
 
 /* --------------- ACCOUNT MANAGEMENT STYLING STARTS --------------- */
+.content-padding {
+    padding-top: 20px;
+}
+
 .card {
     background: radial-gradient(circle at top, #0E1230, #070817);
     border: 1px solid var(--primary-accent-colour);
