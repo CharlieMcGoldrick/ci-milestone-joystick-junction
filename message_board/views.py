@@ -5,6 +5,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
+from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .api.api import make_igdb_api_request
 import json 
@@ -31,8 +32,25 @@ def create_game_main_thread(request, game_id):
 def search_created_main_threads(request):
     search_query = request.GET.get('search', '')
     threads = MainThread.objects.filter(name__icontains=search_query)
-    thread_list = list(threads.values('name'))  # Convert QuerySet to list of dicts
+    thread_list = list(threads.values('id', 'name'))  # Convert QuerySet to list of dicts
     return JsonResponse(thread_list, safe=False)
+
+@require_POST
+def delete_a_main_thread(request):
+    try:
+        thread_id = request.POST.get('thread_id')
+        print('Thread ID:', thread_id)  # Log the thread ID
+
+        thread = MainThread.objects.get(id=thread_id)
+        thread.delete()
+
+        return JsonResponse({'status': 'success'})
+    except MainThread.DoesNotExist:
+        print('MainThread not found')  # Log the error
+        return JsonResponse({'error': 'MainThread not found'}, status=404)
+    except Exception as e:
+        print('Error:', e)  # Log any other exceptions
+        return JsonResponse({'error': 'An error occurred'}, status=500)
 
 # Account Management functions
 def account_management(request):

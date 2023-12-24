@@ -3,7 +3,6 @@ $(document).ready(function () {
         e.preventDefault();
 
         $.ajax({
-            // Access the URL from the data attribute
             url: $(this).data('url'),
             data: $(this).serialize(),
             success: function (data) {
@@ -32,7 +31,6 @@ $(document).ready(function () {
         e.preventDefault();
 
         $.ajax({
-            // Access the URL from the data attribute
             url: $(this).data('url'),
             data: $(this).serialize(),
             success: function (data) {
@@ -52,11 +50,31 @@ $(document).ready(function () {
                     var accordionCollapse = $('<div>').attr('id', 'collapse' + i).addClass('accordion-collapse collapse')
                         .attr('aria-labelledby', 'heading' + i).attr('data-bs-parent', '#searchCreatedMainThreads');
                     var accordionBody = $('<div>').addClass('accordion-body').text(thread.content);
+                    var deleteButton = $('<button>').addClass('delete-button btn delete-button w-100').text('Delete Main Thread')
+                        .attr('data-thread-id', thread.id);
+                    accordionBody.append(deleteButton);
                     accordionCollapse.append(accordionBody);
 
                     accordionItem.append(accordionHeader).append(accordionCollapse);
                     searchCreatedMainThreads.append(accordionItem);
                 });
+            }
+        });
+    });
+
+    $(document).on('click', '.delete-button', function () {
+        var threadId = $(this).data('thread-id');
+        var button = $(this);
+
+        $.ajax({
+            url: '/delete_a_main_thread/',
+            method: 'POST',
+            data: {
+                'thread_id': threadId,
+                'csrfmiddlewaretoken': getCookie('csrftoken')
+            },
+            success: function () {
+                button.closest('.accordion-item').remove();
             }
         });
     });
