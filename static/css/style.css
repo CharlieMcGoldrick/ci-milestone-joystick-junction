@@ -175,10 +175,6 @@ a:hover {
     border-color: var(--secondary-colour);
 }
 
-#searchGamesForMainThread li {
-    list-style-type: none;
-}
-
 .first-result-item {
     margin-top: 1rem;
 }
@@ -190,5 +186,33 @@ a:hover {
 
 .result-item {
     margin-bottom: 1rem;
+}
+
+#searchGamesForMainThread li {
+    list-style-type: none;
+}
+
+.accordion-button {
+    color: var(--primary-colour)
+}
+
+.accordion-item {
+    background-color: var(--primary-colour);
+    margin-bottom: 1rem;
+}
+
+.accordion-item:hover,
+.accordion-item:focus,
+.accordion-button:hover,
+.accordion-button:focus {
+    color: var(--secondary-colour);
+    background-color: var(--primary-colour);
+    border-color: var(--secondary-colour);
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--secondary-colour);
+    background-color: var(--primary-colour);
+    border-color: var(--secondary-colour);
 }
 /* --------------- ADMIN STYLING ENDS --------------- */
