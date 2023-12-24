@@ -24,26 +24,6 @@ $(document).ready(function () {
                     listItem.append(form);
                     searchGamesForMainThread.append(listItem);
                 });
-
-                // Handle form submission via AJAX
-                searchGamesForMainThread.on('submit', 'form', function (e) {
-                    e.preventDefault();
-
-                    $.ajax({
-                        url: $(this).attr('action'),
-                        type: 'POST',
-                        data: $(this).serialize(),
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
-                        },
-                        success: function (data) {
-                            // Handle success
-                        },
-                        error: function (xhr, status, error) {
-                            // Handle error
-                        }
-                    });
-                });
             }
         });
     });
@@ -60,7 +40,22 @@ $(document).ready(function () {
                 searchCreatedMainThreads.empty();
 
                 $.each(data, function (i, thread) {
-                    searchCreatedMainThreads.append('<p>' + thread.name + '</p>');
+                    var accordionItem = $('<div>').addClass('accordion-item mb-3');
+
+                    var accordionHeader = $('<h2>').addClass('accordion-header').attr('id', 'heading' + i);
+                    var accordionButton = $('<button>').addClass('accordion-button collapsed').attr('type', 'button')
+                        .attr('data-bs-toggle', 'collapse').attr('data-bs-target', '#collapse' + i)
+                        .attr('aria-expanded', 'false').attr('aria-controls', 'collapse' + i)
+                        .text(thread.name);
+                    accordionHeader.append(accordionButton);
+
+                    var accordionCollapse = $('<div>').attr('id', 'collapse' + i).addClass('accordion-collapse collapse')
+                        .attr('aria-labelledby', 'heading' + i).attr('data-bs-parent', '#searchCreatedMainThreads');
+                    var accordionBody = $('<div>').addClass('accordion-body').text(thread.content);
+                    accordionCollapse.append(accordionBody);
+
+                    accordionItem.append(accordionHeader).append(accordionCollapse);
+                    searchCreatedMainThreads.append(accordionItem);
                 });
             }
         });
