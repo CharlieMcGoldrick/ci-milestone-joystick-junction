@@ -64,18 +64,23 @@ $(document).ready(function () {
 
     $(document).on('click', '.delete-button', function () {
         var threadId = $(this).data('thread-id');
-        var button = $(this);
+        var button = $(this);  // Store the clicked button in a variable
 
-        $.ajax({
-            url: '/delete_a_main_thread/',
-            method: 'POST',
-            data: {
-                'thread_id': threadId,
-                'csrfmiddlewaretoken': getCookie('csrftoken')
-            },
-            success: function () {
-                button.closest('.accordion-item').remove();
-            }
+        $('#deleteModal').modal('show');  // Show the modal
+
+        $('#confirmDelete').on('click', function () {
+            $.ajax({
+                url: '/delete_a_main_thread/',
+                method: 'POST',
+                data: {
+                    'thread_id': threadId,
+                    'csrfmiddlewaretoken': getCookie('csrftoken')
+                },
+                success: function () {
+                    button.closest('.accordion-item').remove();  // Remove the thread from the page
+                    $('#deleteModal').modal('hide');  // Hide the modal
+                }
+            });
         });
     });
 });
