@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 STATUS = ((0, "Draft"), (1, "Published"))
 
 class MainThread(models.Model):
+    game_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=200)
-    game_id = models.IntegerField()
     status = models.IntegerField(choices=STATUS, default=0)
 
 class Post(models.Model):
