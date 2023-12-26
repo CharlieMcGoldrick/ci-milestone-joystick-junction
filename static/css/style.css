@@ -55,6 +55,27 @@ p {
     padding: 0;
     border: 0;
 }
+
+.toast {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    border-color: var(--secondary-colour);
+    border-radius: 3px;
+    opacity: 0.95;
+}
+
+.toast-header {
+    background-color: var(--primary-background-colour);
+    color: var(--secondary-colour);
+}
+
+.toast-body {
+    background-color: var(--primary-background-colour);
+    color: var(--secondary-colour);
+}
 /* --------------- GLOBAL STYLING ENDS --------------- */
 
 /* --------------- BOOTSTRAP STYLING STARTS --------------- */
