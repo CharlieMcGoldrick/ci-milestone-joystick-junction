@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required, user_passes_test
+from datetime import datetime
 from .api.api import make_igdb_api_request
 import json 
 
@@ -25,17 +26,40 @@ def search_games_for_main_thread(request):
     return JsonResponse(results, safe=False)
 
 def create_game_main_thread(request, game_id):
-    if request.headers['Content-Type'] == 'application/json':
-        data = json.loads(request.body)
-        game_name = data.get('game_name')
-    else:
-        game_name = request.POST.get('game_name')
+    data = json.loads(request.body)
+    game_name = data.get('game_name')
+    cover_id = data.get('cover')
+    first_release_date = datetime.fromtimestamp(data.get('first_release_date'))
+    genres = ', '.join(map(str, data.get('genres', [])))
+    platforms = ', '.join(map(str, data.get('platforms', [])))
+    summary = data.get('summary')
+    artwork_id = data.get('artwork')
+    age_ratings = ', '.join(map(str, data.get('age_ratings', [])))
+    involved_companies = ', '.join(map(str, data.get('involved_companies', [])))
+    game_engines = ', '.join(map(str, data.get('game_engines', [])))
+    aggregated_rating = data.get('aggregated_rating')
+
+    cover = f"https://api.igdb.com/v4/covers/{cover_id}"  # Construct the URL from the ID
+    artwork = f"https://api.igdb.com/v4/artworks/{artwork_id}"  # Construct the URL from the ID
 
     # Check if a MainThread with the given game_id already exists
     if MainThread.objects.filter(game_id=game_id).exists():
         return JsonResponse({'error': 'A thread for this game already exists.'}, status=400)
     # If a MainThread with the given game_id doesn't exist, create a new one
-    game = MainThread.objects.create(name=game_name, game_id=game_id)
+    game = MainThread.objects.create(
+        name=game_name, 
+        game_id=game_id,
+        cover=cover,
+        first_release_date=first_release_date,
+        genres=genres,
+        platforms=platforms,
+        summary=summary,
+        artwork=artwork,
+        age_ratings=age_ratings,
+        involved_companies=involved_companies,
+        game_engines=game_engines,
+        aggregated_rating=aggregated_rating
+    )
     return JsonResponse({'success': 'Thread created successfully.'})
 
 def search_created_main_threads(request):

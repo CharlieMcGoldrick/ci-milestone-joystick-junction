@@ -7,6 +7,16 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class MainThread(models.Model):
     game_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=200)
+    cover = models.URLField(blank=True, null=True)
+    first_release_date = models.DateTimeField(blank=True, null=True)
+    genres = models.TextField(blank=True, null=True)
+    platforms = models.TextField(blank=True, null=True)
+    summary = models.TextField(blank=True, null=True)
+    artwork = models.URLField(blank=True, null=True)
+    age_ratings = models.TextField(blank=True, null=True)
+    involved_companies = models.TextField(blank=True, null=True)
+    game_engines = models.TextField(blank=True, null=True)
+    aggregated_rating = models.FloatField(blank=True, null=True)
     status = models.IntegerField(choices=STATUS, default=0)
 
 class Post(models.Model):
