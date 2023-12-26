@@ -28,18 +28,5 @@
     <input type="hidden" name="signup" value="true">
     <button type="submit" class="btn btn-primary w-100">Signup</button>
 </form>
-
-<!-- Error Toasts -->
-<div class="toast" id="errorToast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-        <strong class="me-auto">Error</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body" id="toastBody">
-    </div>
-</div>
-
-<!-- Scripts -->
-<script src="{% static 'js/csrf.js' %}"></script>
-<script src="{% static 'js/toasts.js' %}"></script>
+{% include "toasts.html" %}
 {% endblock content %}

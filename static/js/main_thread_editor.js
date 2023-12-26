@@ -15,7 +15,7 @@ $(document).ready(function () {
                         listItem.addClass('first-result-item');
                     }
 
-                    var form = $('<form>').attr('method', 'post').attr('action', $('#searchFormFindGame').data('base-action-url') + game.id + '/');
+                    var form = $('<form>').addClass('create-thread-form').attr('method', 'post').attr('action', $('#searchFormFindGame').data('base-action-url') + game.id + '/');
                     form.append($('<input>').attr('type', 'hidden').attr('name', 'csrfmiddlewaretoken').val(getCookie('csrftoken')));
                     form.append($('<input>').attr('type', 'hidden').attr('name', 'game_name').val(game.name));
                     form.append($('<button>').addClass('result-button btn btn-primary w-100').text('Create Main Thread ' + game.name));

@@ -25,9 +25,18 @@ def search_games_for_main_thread(request):
     return JsonResponse(results, safe=False)
 
 def create_game_main_thread(request, game_id):
-    game_name = request.POST.get('game_name')
+    if request.headers['Content-Type'] == 'application/json':
+        data = json.loads(request.body)
+        game_name = data.get('game_name')
+    else:
+        game_name = request.POST.get('game_name')
+
+    # Check if a MainThread with the given game_id already exists
+    if MainThread.objects.filter(game_id=game_id).exists():
+        return JsonResponse({'error': 'A thread for this game already exists.'}, status=400)
+    # If a MainThread with the given game_id doesn't exist, create a new one
     game = MainThread.objects.create(name=game_name, game_id=game_id)
-    return HttpResponseRedirect(reverse('account_management'))
+    return JsonResponse({'success': 'Thread created successfully.'})
 
 def search_created_main_threads(request):
     search_query = request.GET.get('search', '')
