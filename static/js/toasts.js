@@ -58,93 +58,55 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     email: emailInput.value
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.username_taken) {
-                    toastBody.textContent = 'Username is already taken.';
-                    notificationToast.show();
-                } else if (data.email_taken) {
-                    toastBody.textContent = 'Email is already taken.';
-                    notificationToast.show();
-                } else {
-                    // If username and email are not taken, submit the form
-                    fetch('/signup/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': csrftoken
-                        },
-                        body: JSON.stringify({
-                            username: usernameInput.value,
-                            email: emailInput.value,
-                            password1: password1Input.value,
-                            password2: password2Input.value
-                        })
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            // Handle error
-                            toastBody.textContent = 'There was an error during the signup process. Please try again.';
-                            notificationToast.show();
-                        } else {
-                            // Handle success
-                            toastBody.textContent = 'Signup successful! Redirecting to home page...';
-                            notificationToast.show();
-                            setTimeout(() => {
-                                window.location.href = '/'; // Redirect to home page
-                            }, 2000); // Redirect after 2 seconds
-                        }
-                    })
-                    .catch(error => {
-                        // Handle the error
-                        toastBody.textContent = 'There was an error during the signup process. Please try again.';
-                        notificationToast.show();
-                    });
-                }
-            })
-            .catch(error => {
-                // Handle the error
-                toastBody.textContent = 'There was an error checking the username and email. Please try again.';
-                notificationToast.show();
-            });
-        });
-    }
-
-    // Main Thread Creation Form toasts
-    document.addEventListener('submit', function (event) {
-        if (event.target.matches('.create-thread-form')) {  // Check if the submitted form has the class 'create-thread-form'
-            event.preventDefault(); // Prevent form from submitting immediately
-
-            // Get the CSRF token
-            const csrftoken = getCookie('csrftoken');
-
-            // Submit the form data
-            fetch(event.target.getAttribute('action'), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken
-                },
-                body: JSON.stringify({
-                    game_name: event.target.querySelector('input[name="game_name"]').value,
-                })
-            })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.error) {
-                        toastBody.textContent = data.error;
+                    if (data.username_taken) {
+                        toastBody.textContent = 'Username is already taken.';
+                        notificationToast.show();
+                    } else if (data.email_taken) {
+                        toastBody.textContent = 'Email is already taken.';
                         notificationToast.show();
                     } else {
-                        // Handle success
-                        toastBody.textContent = data.success;
-                        notificationToast.show();
+                        // If username and email are not taken, submit the form
+                        fetch('/signup/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': csrftoken
+                            },
+                            body: JSON.stringify({
+                                username: usernameInput.value,
+                                email: emailInput.value,
+                                password1: password1Input.value,
+                                password2: password2Input.value
+                            })
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    // Handle error
+                                    toastBody.textContent = 'There was an error during the signup process. Please try again.';
+                                    notificationToast.show();
+                                } else {
+                                    // Handle success
+                                    toastBody.textContent = 'Signup successful! Redirecting to home page...';
+                                    notificationToast.show();
+                                    setTimeout(() => {
+                                        window.location.href = '/'; // Redirect to home page
+                                    }, 2000); // Redirect after 2 seconds
+                                }
+                            })
+                            .catch(error => {
+                                // Handle the error
+                                toastBody.textContent = 'There was an error during the signup process. Please try again.';
+                                notificationToast.show();
+                            });
                     }
                 })
                 .catch(error => {
                     // Handle the error
-                    toastBody.textContent = 'There was an error during the thread creation process. Please try again.';
+                    toastBody.textContent = 'There was an error checking the username and email. Please try again.';
                     notificationToast.show();
                 });
-        }
-    });
+        });
+    }
 });
