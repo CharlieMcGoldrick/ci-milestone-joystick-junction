@@ -1,20 +1,26 @@
-{% load static %}
-{% load i18n %}
-{% block content %}
+{% load static %} {% load i18n %} {% block content %}
 <div id="findAGameTab">
-    <form id="searchFormFindGame" data-url="{% url 'search_games_for_main_thread' %}"
-        data-base-action-url="/create_game_main_thread/">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="query" class="form-label"></label>
-            <input type="text" class="form-control" id="query" name="query" required>
-        </div>
-        <button type="submit" class="btn search-button w-100">Search</button>
-    </form>
-
-    <div id="searchGamesForMainThread">
-        <!-- The results will be appended here by the AJAX success function -->
+  <form
+    id="searchFormFindGame"
+    data-url="{% url 'search_games_for_main_thread' %}"
+    data-base-action-url="/create_game_main_thread/"
+  >
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="query" class="form-label"></label>
+      <input
+        type="text"
+        class="form-control"
+        id="query"
+        name="query"
+        required
+      />
     </div>
+    <button type="submit" class="btn search-button w-100">Search</button>
+  </form>
+
+  <div id="searchGamesForMainThread">
+    <!-- The results will be appended here by the AJAX success function -->
+  </div>
 </div>
-{% include "toasts.html" %}
 {% endblock content %}
