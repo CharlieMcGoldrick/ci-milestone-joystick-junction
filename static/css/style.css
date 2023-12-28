@@ -76,12 +76,14 @@ p {
     background-color: var(--primary-background-colour);
     color: var(--secondary-colour);
 }
+
 /* --------------- GLOBAL STYLING ENDS --------------- */
 
 /* --------------- BOOTSTRAP STYLING STARTS --------------- */
 .btn-primary {
     background-color: var(--primary-accent-colour);
 }
+
 /* --------------- BOOTSTRAP STYLING ENDS --------------- */
 
 
@@ -131,6 +133,7 @@ a:hover {
 .logo-container:hover {
     background-image: url('/static/images/joystick_junction_logo_hover_50x50.png');
 }
+
 /* --------------- NAVBAR STYLING ENDS --------------- */
 
 
@@ -166,6 +169,7 @@ a:hover {
 .hidden-input {
     visibility: hidden;
 }
+
 /* --------------- ACCOUNT MANAGEMENT STYLING ENDS --------------- */
 
 /* --------------- ADMIN STYLING STARTS --------------- */
@@ -220,12 +224,17 @@ a:hover {
     list-style-type: none;
 }
 
+.accordion-header {
+    color: var(--secondary-color);
+}
+
 .accordion-button {
     color: var(--primary-colour)
 }
 
 .accordion-item {
     background-color: var(--primary-colour);
+    color: var(--secondary-colour);
     margin-bottom: 1rem;
 }
 
@@ -254,14 +263,16 @@ a:hover {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%230c0c0e' viewBox='0 0 16 16'%3e%3cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
 
-#searchCreatedMainThreads .delete-button {
+#searchCreatedMainThreads .action-button {
     color: var(--secondary-colour);
     border-color: var(--secondary-colour);
+    margin: 10px 0;
 }
 
-#searchCreatedMainThreads .delete-button:hover {
+#searchCreatedMainThreads .action-button:hover {
     color: var(--primary-colour);
     background-color: var(--secondary-colour);
     border-color: var(--primary-accent-colour);
 }
+
 /* --------------- ADMIN STYLING ENDS --------------- */

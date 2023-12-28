@@ -144,7 +144,10 @@ $(document).ready(function () {
                         accordionBody.append(infoRow);
                     });
 
-                    var deleteButton = $('<button>').addClass('delete-button btn delete-button w-100').text('Delete Main Thread')
+                    var publishButton = $('<button>').addClass('action-button btn btn-primary w-50').text('Publish Main Thread')
+                        .attr('data-thread-id', thread.id);
+                    accordionBody.append(publishButton);
+                    var deleteButton = $('<button>').addClass('action-button btn delete-button w-50').text('Delete Main Thread')
                         .attr('data-thread-id', thread.id);
                     accordionBody.append(deleteButton);
                     accordionCollapse.append(accordionBody);
