@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.exceptions import ValidationError
 from datetime import datetime
 from .api.api import make_igdb_api_request
 import json 
@@ -17,7 +18,7 @@ def home(request):
 
 def make_main_thread_search_request(query):
     endpoint = 'games'
-    query_body = f'fields *; where (category = 0 | category = 10) & version_title = null; search "{query}"; limit 10;'
+    query_body = f'fields name,genres.name,platforms.name,summary,involved_companies.company.name,game_engines.name,aggregated_rating; where (category = 0 | category = 10) & version_title = null; search "{query}"; limit 10;'
     return make_igdb_api_request(endpoint, query_body)
 
 def search_games_for_main_thread(request):
@@ -26,46 +27,42 @@ def search_games_for_main_thread(request):
     return JsonResponse(results, safe=False)
 
 def create_game_main_thread(request, game_id):
+    print(request.body)
     data = json.loads(request.body)
+    print(data)  # Log the request data
     game_name = data.get('game_name')
-    cover_id = data.get('cover')
-    first_release_date = datetime.fromtimestamp(data.get('first_release_date'))
-    genres = ', '.join(map(str, data.get('genres', [])))
-    platforms = ', '.join(map(str, data.get('platforms', [])))
+    genres = json.loads(data.get('genres', '[]'))
+    platforms = json.loads(data.get('platforms', '[]'))
     summary = data.get('summary')
-    artwork_id = data.get('artwork')
-    age_ratings = ', '.join(map(str, data.get('age_ratings', [])))
-    involved_companies = ', '.join(map(str, data.get('involved_companies', [])))
-    game_engines = ', '.join(map(str, data.get('game_engines', [])))
+    involved_companies = json.loads(data.get('involved_companies', '[]'))
+    game_engines = json.loads(data.get('game_engines', '[]'))
     aggregated_rating = data.get('aggregated_rating')
-
-    cover = f"https://api.igdb.com/v4/covers/{cover_id}"  # Construct the URL from the ID
-    artwork = f"https://api.igdb.com/v4/artworks/{artwork_id}"  # Construct the URL from the ID
 
     # Check if a MainThread with the given game_id already exists
     if MainThread.objects.filter(game_id=game_id).exists():
         return JsonResponse({'error': 'A thread for this game already exists.'}, status=400)
-    # If a MainThread with the given game_id doesn't exist, create a new one
-    game = MainThread.objects.create(
-        name=game_name, 
-        game_id=game_id,
-        cover=cover,
-        first_release_date=first_release_date,
-        genres=genres,
-        platforms=platforms,
-        summary=summary,
-        artwork=artwork,
-        age_ratings=age_ratings,
-        involved_companies=involved_companies,
-        game_engines=game_engines,
-        aggregated_rating=aggregated_rating
-    )
-    return JsonResponse({'success': 'Thread created successfully.'})
+
+    # Create a new MainThread instance
+    try:
+        game = MainThread(
+            name=game_name,
+            game_id=game_id,
+            summary=summary,
+            aggregated_rating=aggregated_rating
+        )
+        game.set_genres(genres)
+        game.set_platforms(platforms)
+        game.set_involved_companies(involved_companies)
+        game.set_game_engines(game_engines)
+        game.save()
+        return JsonResponse({'success': 'Thread created successfully.'})
+    except ValidationError as e:
+        return JsonResponse({'error': str(e)}, status=400)
 
 def search_created_main_threads(request):
-    search_query = request.GET.get('search', '')
-    threads = MainThread.objects.filter(name__icontains=search_query)
-    thread_list = list(threads.values('id', 'name'))  # Convert QuerySet to list of dicts
+    search = request.GET.get('search', '')
+    threads = MainThread.objects.filter(name__icontains=search).values()
+    thread_list = list(threads)
     return JsonResponse(thread_list, safe=False)
 
 @require_POST
