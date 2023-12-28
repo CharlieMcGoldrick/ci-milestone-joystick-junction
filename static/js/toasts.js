@@ -1,7 +1,10 @@
-// Signup Form toasts
+// toasts.js
+let notificationToast;
+let toastBody;
+
 document.addEventListener('DOMContentLoaded', (event) => {
-    const notificationToast = new bootstrap.Toast(document.getElementById('notificationToast'));
-    const toastBody = document.getElementById('toastBody');
+    notificationToast = new bootstrap.Toast(document.getElementById('notificationToast'));
+    toastBody = document.getElementById('toastBody');
 
     // Signup Form toasts
     const signupForm = document.getElementById('signupForm');
