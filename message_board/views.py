@@ -25,8 +25,14 @@ def homepage_search_threads(request):
     )[:5]  # Limit to top 5 results
 
     if results.exists():
-        results = list(results.values('name'))  # Only return the name of the threads
-        return JsonResponse({'results': results})
+        results_data = []
+        for result in results:
+            result_data = {
+                'name': result.name,
+                'url': reverse('main_thread_detail', args=[result.game_id]),
+            }
+            results_data.append(result_data)
+        return JsonResponse({'results': results_data})
     else:
         return JsonResponse({'no_results': True})
 
