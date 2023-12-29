@@ -13,8 +13,8 @@ from .api.api import make_igdb_api_request
 import json 
 
 def home(request):
-    template_name = "index.html"
-    return render(request, template_name)
+    main_threads = MainThread.objects.filter(status=1)
+    return render(request, 'index.html', {'main_threads': main_threads})
 
 def make_main_thread_search_request(query):
     endpoint = 'games'
