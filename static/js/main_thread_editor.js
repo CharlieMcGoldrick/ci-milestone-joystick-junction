@@ -295,7 +295,7 @@ $(document).ready(function () {
 
         $("#deleteModal").modal("show");
 
-        $("#confirmDelete").on("click", function () {
+        $("#confirmDelete").off("click").on("click", function () {
             $.ajax({
                 url: "/delete_a_main_thread/",
                 method: "POST",
