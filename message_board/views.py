@@ -55,7 +55,17 @@ def post_comment(request, game_id):
     # If the request is not a POST request, return an error response
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
-        
+
+@login_required
+def reply_to_comment(request, comment_id):
+    if request.method == 'POST':
+        parent_comment = get_object_or_404(Comment, id=comment_id)
+        text = request.POST.get('text')
+        Comment.objects.create(game_id=parent_comment.game_id, user=request.user, text=text, parent=parent_comment)
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+
 
 def make_main_thread_search_request(query):
     endpoint = 'games'
