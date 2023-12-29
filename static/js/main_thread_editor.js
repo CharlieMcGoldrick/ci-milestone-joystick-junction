@@ -100,7 +100,7 @@ $(document).ready(function () {
         });
     });
 
-    $(document).one("submit", ".create-thread-form", function (e) {
+    $(document).on("submit", ".create-thread-form", function (e) {
         e.preventDefault();
 
         var formData = $(this).serializeArray();
