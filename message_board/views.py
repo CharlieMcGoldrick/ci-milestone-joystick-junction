@@ -3,7 +3,8 @@ from .forms import SignupForm
 from .models import MainThread, Comment
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.models import User, Group
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -202,6 +203,16 @@ def check_username_email(request):
     }
 
     return JsonResponse(data)
+
+class login_view(LoginView):
+    def form_valid(self, form):
+        """Security check complete. Log the user in."""
+        self.request.session.set_test_cookie()
+        auth_login(self.request, form.get_user())
+        return JsonResponse({'status': 'success', 'message': 'Login successful! Redirecting to home page...'})
+
+    def form_invalid(self, form):
+        return JsonResponse({'status': 'error', 'message': 'Invalid username or password.'}, status=400)
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)

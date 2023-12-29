@@ -1,15 +1,19 @@
-{% load i18n %}
-{% block content %}
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <div class="my-3">
-            <label for="id_username" class="form-label">Username:</label>
-            <input type="text" class="form-control" name="username" id="id_username">
-        </div>
-        <div class="mb-3">
-            <label for="id_password" class="form-label">Password:</label>
-            <input type="password" class="form-control" name="password" id="id_password">
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+{% load i18n %} {% block content %}
+<form id="loginForm" method="post" novalidate>
+  {% csrf_token %}
+  <div class="my-3">
+    <label for="id_username" class="form-label">Username:</label>
+    <input type="text" class="form-control" name="username" id="id_username" />
+  </div>
+  <div class="mb-3">
+    <label for="id_password" class="form-label">Password:</label>
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      id="id_password"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
 {% endblock content %}

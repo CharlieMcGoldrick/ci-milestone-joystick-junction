@@ -112,4 +112,54 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 });
         });
     }
+    // Login Form toasts
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {  // Check if loginForm exists
+        const usernameInput = document.getElementById('id_username');
+        const passwordInput = document.getElementById('id_password');
+
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form from submitting immediately
+
+            // Get the CSRF token
+            const csrftoken = getCookie('csrftoken');
+
+            // Prepare the form data
+            const formData = new URLSearchParams();
+            formData.append('username', usernameInput.value);
+            formData.append('password', passwordInput.value);
+
+            // Submit the form
+            fetch('/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrftoken
+                },
+                body: formData
+            })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Handle success
+                        toastBody.textContent = data.message;
+                        notificationToast.show();
+                        setTimeout(() => {
+                            window.location.href = '/'; // Redirect to home page
+                        }, 2000); // Redirect after 2 seconds
+                    } else {
+                        // Handle error
+                        toastBody.textContent = data.message;
+                        notificationToast.show();
+                    }
+                })
+                .catch(error => {
+                    // Handle the error
+                    toastBody.textContent = 'There was an error during the login process. Please try again.';
+                    notificationToast.show();
+                });
+        });
+    }
 });
