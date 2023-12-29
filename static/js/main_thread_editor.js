@@ -2,21 +2,16 @@ $(document).ready(function () {
     $("#searchFormFindGame").on("submit", function (e) {
         e.preventDefault();
 
-        // Log the form data
         var formData = $(this).serializeArray();
-        console.log(formData);
 
         $.ajax({
             url: $(this).data("url"),
             data: $(this).serialize(),
             success: function (data) {
-                console.log(data); // Log the API response
-
                 var searchGamesForMainThread = $("#searchGamesForMainThread");
                 searchGamesForMainThread.empty();
 
                 $.each(data, function (i, game) {
-                    console.log(game); // Log the game data
                     var listItem = $("<li>").addClass("result-item");
                     if (i === 0) {
                         listItem.addClass("first-result-item");
@@ -124,14 +119,10 @@ $(document).ready(function () {
                 xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
             },
             success: function (response) {
-                console.log(response);
-                // Show success toast
                 toastBody.textContent = response.success;
                 notificationToast.show();
             },
             error: function (response) {
-                console.error(response);
-                // Show error toast
                 toastBody.textContent = response.responseJSON.error;
                 notificationToast.show();
             },
@@ -145,7 +136,6 @@ $(document).ready(function () {
             url: $(this).data("url"),
             data: $(this).serialize(),
             success: function (data) {
-                console.log(data); // Log the data
                 var searchCreatedMainThreads = $("#searchCreatedMainThreads");
                 searchCreatedMainThreads.empty();
 
@@ -174,7 +164,6 @@ $(document).ready(function () {
                         .attr("data-bs-parent", "#searchCreatedMainThreads");
                     var accordionBody = $("<div>").addClass("accordion-body");
 
-                    // Add all the fields to the accordion body
                     var fields = [
                         "name",
                         "summary",
@@ -187,7 +176,6 @@ $(document).ready(function () {
                     $.each(fields, function (j, field) {
                         var infoRow = $("<div>").addClass("info-row row");
 
-                        // Remove underscores and capitalize the first letter of each word
                         var formattedField = field
                             .replace(/_/g, " ")
                             .replace(/\b\w/g, function (l) {
@@ -231,14 +219,12 @@ $(document).ready(function () {
                             .attr("for", field + "Switch");
                         switchCol.append(switchInput).append(switchLabel);
 
-                        // Set the checked attribute to true for name and summary
                         if (field === "name" || field === "summary") {
                             switchInput.attr("checked", true);
                         }
 
                         infoRow.append(titleCol).append(dataCol).append(switchCol);
 
-                        // Set the disabled attribute to true for name and summary
                         if (field === "name" || field === "summary") {
                             switchInput.attr("disabled", true);
                             switchLabel.css("color", "#6c757d"); // Set the label color to grey
@@ -267,44 +253,17 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on("click", ".delete-button", function () {
-        var game_id = $(this).data("game-id");
-        var button = $(this); // Store the clicked button in a variable
-
-        $("#deleteModal").modal("show"); // Show the modal
-
-        $("#confirmDelete").on("click", function () {
-            $.ajax({
-                url: "/delete_a_main_thread/",
-                method: "POST",
-                data: {
-                    game_id: game_id,
-                    csrfmiddlewaretoken: getCookie("csrftoken"),
-                },
-                success: function () {
-                    button.closest(".accordion-item").remove(); // Remove the thread from the page
-                    $("#deleteModal").modal("hide"); // Hide the modal
-                },
-            });
-        });
-    });
-
     $(document).on("click", ".publish-button", function () {
         var game_id = $(this).data("game-id");
-        console.log("game_id:", game_id);
 
         var visibilityStates = {};
         var checkboxes = $("#thread-" + game_id + " .form-check-input");
-        console.log("checkboxes:", checkboxes);
 
         checkboxes.each(function () {
             var field = $(this).attr("id").replace("Switch", "");
             var is_checked = $(this).is(":checked");
-            console.log("field:", field, "is_checked:", is_checked);
             visibilityStates[field] = is_checked;
         });
-
-        console.log("visibilityStates:", visibilityStates);
 
         $.ajax({
             url: "/update_and_publish_thread/",
@@ -315,20 +274,40 @@ $(document).ready(function () {
                 csrfmiddlewaretoken: getCookie("csrftoken"),
             },
             success: function (response) {
-                // Handle success
                 var toastEl = document.getElementById("notificationToast");
                 var toast = new bootstrap.Toast(toastEl);
                 toastEl.querySelector(".toast-body").textContent = response.status;
                 toast.show();
             },
             error: function (response) {
-                // Handle error
                 var toastEl = document.getElementById("notificationToast");
                 var toast = new bootstrap.Toast(toastEl);
                 toastEl.querySelector(".toast-body").textContent =
                     response.responseJSON.error;
                 toast.show();
             },
+        });
+    });
+
+    $(document).on("click", ".delete-button", function () {
+        var game_id = $(this).data("game-id");
+        var button = $(this);
+
+        $("#deleteModal").modal("show");
+
+        $("#confirmDelete").on("click", function () {
+            $.ajax({
+                url: "/delete_a_main_thread/",
+                method: "POST",
+                data: {
+                    game_id: game_id,
+                    csrfmiddlewaretoken: getCookie("csrftoken"),
+                },
+                success: function () {
+                    button.closest(".accordion-item").remove();
+                    $("#deleteModal").modal("hide");
+                },
+            });
         });
     });
 });

@@ -27,9 +27,7 @@ def search_games_for_main_thread(request):
     return JsonResponse(results, safe=False)
 
 def create_game_main_thread(request, game_id):
-    print(request.body)
     data = json.loads(request.body)
-    print(data)  # Log the request data
     game_name = data.get('game_name')
     genres = json.loads(data.get('genres', '[]'))
     platforms = json.loads(data.get('platforms', '[]'))
@@ -38,11 +36,9 @@ def create_game_main_thread(request, game_id):
     game_engines = json.loads(data.get('game_engines', '[]'))
     aggregated_rating = data.get('aggregated_rating')
 
-    # Check if a MainThread with the given game_id already exists
     if MainThread.objects.filter(game_id=game_id).exists():
         return JsonResponse({'error': 'A thread for this game already exists.'}, status=400)
 
-    # Create a new MainThread instance
     try:
         game = MainThread(
             name=game_name,
@@ -72,15 +68,12 @@ def update_and_publish_thread(request):
         visibility_states = json.loads(request.POST.get('visibility_states'))
 
         thread = MainThread.objects.get(game_id=game_id)
-        print('MainThread before:', thread.__dict__)
 
         for field, is_visible in visibility_states.items():
             setattr(thread, f'{field}_visible', is_visible)
 
-        thread.status = 1  # Change status to Published
+        thread.status = 1
         thread.save()
-
-        print('MainThread after:', thread.__dict__)
 
         return JsonResponse({'status': 'success'})
     except MainThread.DoesNotExist:
@@ -102,12 +95,10 @@ def delete_a_main_thread(request):
     except Exception as e:
         return JsonResponse({'error': 'An error occurred'}, status=500)
 
-# Account Management functions
 def account_management(request):
     results = None
     form_submitted = False
     return render(request, 'account_management.html')
-
 
 def signup_view(request):
     if request.method == 'POST':
@@ -127,7 +118,6 @@ def signup_view(request):
 
     return render(request, 'signup.html', {'signup_form': signup_form})
 
-
 def check_username_email(request):
     data = json.loads(request.body)
     username = data.get('username')
@@ -140,7 +130,6 @@ def check_username_email(request):
 
     return JsonResponse(data)
 
-
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def promote_to_admin(request):
@@ -152,17 +141,13 @@ def promote_to_admin(request):
             user.save()
             return redirect('account_management')
         else:
-            # Handle case where user does not exist or is not in BasicUser group
             pass
     return redirect('account_management')
-
 
 def logout_view(request):
     logout(request)
     return redirect('home')
 
-
-# Error views
 def custom_error_404(request, exception):
     return render(request, '404.html', {}, status=404)
 
