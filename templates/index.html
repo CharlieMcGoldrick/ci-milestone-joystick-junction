@@ -1,6 +1,99 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="d-flex align-items-center justify-content-center min-vh-100">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9">
+        <!-- Main thread Search -->
+        <div class="card mb-3 card-spacing">
+          <div class="card-body">
+            <form
+              id="homepageSearchFormMainThread"
+              method="get"
+              data-url="{% url 'homepage_search_threads' %}"
+            >
+              <div class="mb-3">
+                <label for="query" class="form-label"></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="search"
+                  placeholder="Search threads"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Search
+              </button>
+            </form>
 
-{% block content %}
+            <!-- Search Results -->
+            <div id="homepageResultsContainer"></div>
+          </div>
+        </div>
 
-
+        <!-- Thread Panels -->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-3 card-spacing">
+              <div class="card-body">
+                <h2>Popular Games</h2>
+                {% for main_thread in main_threads %}
+                <div class="thread">
+                  <h3>
+                    <a
+                      href="{% url 'main_thread_detail' game_id=main_thread.game_id %}"
+                      >{{ main_thread.name }}</a
+                    >
+                  </h3>
+                </div>
+                {% empty %}
+                <p>No threads have been created yet.</p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-3 card-spacing">
+              <div class="card-body">
+                <h2>New Games</h2>
+                {% for main_thread in main_threads %}
+                <div class="thread">
+                  <h3>
+                    <a
+                      href="{% url 'main_thread_detail' game_id=main_thread.game_id %}"
+                      >{{ main_thread.name }}</a
+                    >
+                  </h3>
+                </div>
+                {% empty %}
+                <p>No threads have been created yet.</p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-3 card-spacing">
+              <div class="card-body">
+                <h2>Trending Discussion</h2>
+                {% for main_thread in main_threads %}
+                <div class="thread">
+                  <h3>
+                    <a
+                      href="{% url 'main_thread_detail' game_id=main_thread.game_id %}"
+                      >{{ main_thread.name }}</a
+                    >
+                  </h3>
+                </div>
+                {% empty %}
+                <p>No threads have been created yet.</p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Scripts -->
+<script src="{% static 'js/homepage_main_thread_search.js' %}"></script>
 {% endblock %}
