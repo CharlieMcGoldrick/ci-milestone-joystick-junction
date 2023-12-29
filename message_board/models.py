@@ -8,7 +8,7 @@ import json
 STATUS = ((0, "Draft"), (1, "Published"))
 
 class MainThread(models.Model):
-    game_id = models.IntegerField(unique=True)
+    game_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
     genres = models.TextField(blank=True, null=True)
     platforms = models.TextField(blank=True, null=True)
@@ -41,6 +41,15 @@ class MainThread(models.Model):
 
     def get_game_engines(self):
         return json.loads(self.game_engines)
+
+    # Add new fields for visibility state
+    name_visible = models.BooleanField(default=True)
+    summary_visible = models.BooleanField(default=True)
+    genres_visible = models.BooleanField(default=False)
+    platforms_visible = models.BooleanField(default=False)
+    involved_companies_visible = models.BooleanField(default=False)
+    game_engines_visible = models.BooleanField(default=False)
+    aggregated_rating_visible = models.BooleanField(default=False)
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
