@@ -145,7 +145,27 @@ def update_and_publish_thread(request):
         thread.status = 1
         thread.save()
 
-        return JsonResponse({'status': 'success'})
+        return JsonResponse({'status': 'This thread was succesfully updated and published'})
+    except MainThread.DoesNotExist:
+        return JsonResponse({'error': 'MainThread not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': 'An error occurred'}, status=500)
+
+@require_POST
+def update_and_unpublish_thread(request):
+    try:
+        game_id = request.POST.get('game_id')
+        visibility_states = json.loads(request.POST.get('visibility_states'))
+
+        thread = MainThread.objects.get(game_id=game_id)
+
+        for field, is_visible in visibility_states.items():
+            setattr(thread, f'{field}_visible', is_visible)
+
+        thread.status = 0
+        thread.save()
+
+        return JsonResponse({'status': 'This thread was succesfully updated and unpublished'})
     except MainThread.DoesNotExist:
         return JsonResponse({'error': 'MainThread not found'}, status=404)
     except Exception as e:

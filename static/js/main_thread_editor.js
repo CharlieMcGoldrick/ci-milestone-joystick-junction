@@ -239,11 +239,18 @@ $(document).ready(function () {
                         .attr("data-game-id", thread.game_id);
                     accordionBody.append(publishButton);
 
+                    var unpublishButton = $("<button>")
+                        .addClass("action-button btn unpublish-button w-50")
+                        .text("Unpublish Main Thread")
+                        .attr("data-game-id", thread.game_id);
+                    accordionBody.append(unpublishButton);
+
                     var deleteButton = $("<button>")
-                        .addClass("action-button btn delete-button w-50")
+                        .addClass("action-button btn delete-button w-100")
                         .text("Delete Main Thread")
                         .attr("data-game-id", thread.game_id);
                     accordionBody.append(deleteButton);
+
                     accordionCollapse.append(accordionBody);
 
                     accordionItem.append(accordionHeader).append(accordionCollapse);
@@ -267,6 +274,42 @@ $(document).ready(function () {
 
         $.ajax({
             url: "/update_and_publish_thread/",
+            method: "POST",
+            data: {
+                game_id: game_id,
+                visibility_states: JSON.stringify(visibilityStates),
+                csrfmiddlewaretoken: getCookie("csrftoken"),
+            },
+            success: function (response) {
+                var toastEl = document.getElementById("notificationToast");
+                var toast = new bootstrap.Toast(toastEl);
+                toastEl.querySelector(".toast-body").textContent = response.status;
+                toast.show();
+            },
+            error: function (response) {
+                var toastEl = document.getElementById("notificationToast");
+                var toast = new bootstrap.Toast(toastEl);
+                toastEl.querySelector(".toast-body").textContent =
+                    response.responseJSON.error;
+                toast.show();
+            },
+        });
+    });
+
+    $(document).on("click", ".unpublish-button", function () {
+        var game_id = $(this).data("game-id");
+
+        var visibilityStates = {};
+        var checkboxes = $("#thread-" + game_id + " .form-check-input");
+
+        checkboxes.each(function () {
+            var field = $(this).attr("id").replace("Switch", "");
+            var is_checked = $(this).is(":checked");
+            visibilityStates[field] = is_checked;
+        });
+
+        $.ajax({
+            url: "/update_and_unpublish_thread/",
             method: "POST",
             data: {
                 game_id: game_id,

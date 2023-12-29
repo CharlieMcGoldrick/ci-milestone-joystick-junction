@@ -12,6 +12,7 @@ urlpatterns = [
     path('create_game_main_thread/<int:game_id>/', views.create_game_main_thread, name='create_game_main_thread'),
     path('search_created_main_threads/', views.search_created_main_threads, name='search_created_main_threads'),
     path('update_and_publish_thread/', views.update_and_publish_thread, name='update_and_publish_thread'),
+    path('update_and_unpublish_thread/', views.update_and_unpublish_thread, name='update_and_unpublish_thread'),
     path('delete_a_main_thread/', views.delete_a_main_thread, name='delete_a_main_thread'),
     path('promote_to_admin/', views.promote_to_admin, name='promote_to_admin'),
     path('logout/', views.logout_view, name='logout'),
