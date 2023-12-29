@@ -13,6 +13,7 @@ urlpatterns = [
     path('search_created_main_threads/', views.search_created_main_threads, name='search_created_main_threads'),
     path('update_and_publish_thread/', views.update_and_publish_thread, name='update_and_publish_thread'),
     path('delete_a_main_thread/', views.delete_a_main_thread, name='delete_a_main_thread'),
+    path('homepage_search_threads/', views.homepage_search_threads, name='homepage_search_threads'),
     path('main_threads/<int:game_id>/', views.main_thread_detail, name='main_thread_detail'),
     path('promote_to_admin/', views.promote_to_admin, name='promote_to_admin'),
     path('logout/', views.logout_view, name='logout'),

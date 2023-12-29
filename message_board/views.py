@@ -10,11 +10,25 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import ValidationError
 from datetime import datetime
 from .api.api import make_igdb_api_request
+from django.db.models import Q
 import json 
 
 def home(request):
     main_threads = MainThread.objects.filter(status=1)
     return render(request, 'index.html', {'main_threads': main_threads})
+
+def homepage_search_threads(request):
+    query = request.GET.get('search')
+    results = MainThread.objects.filter(
+        Q(name__icontains=query),
+        status=1  # Only include published threads
+    )[:5]  # Limit to top 5 results
+
+    if results.exists():
+        results = list(results.values('name'))  # Only return the name of the threads
+        return JsonResponse({'results': results})
+    else:
+        return JsonResponse({'no_results': True})
 
 def make_main_thread_search_request(query):
     endpoint = 'games'
