@@ -1,4 +1,4 @@
-{% load static %} {% load i18n %} {% block content %}
+{% load i18n %} {% block content %}
 <ul class="nav nav-tabs" id="adminTabs" role="tablist">
   <li class="nav-item" role="presentation">
     <a
@@ -45,8 +45,4 @@
     {% include "main_thread_editor.html" %}
   </div>
 </div>
-<!-- Scripts -->
-<script src="{% static 'js/csrf.js' %}"></script>
-<script src="{% static 'js/toasts.js' %}"></script>
-<script src="{% static 'js/main_thread_editor.js' %}"></script>
 {% endblock %}
