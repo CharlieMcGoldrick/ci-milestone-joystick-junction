@@ -95,6 +95,10 @@ def delete_a_main_thread(request):
     except Exception as e:
         return JsonResponse({'error': 'An error occurred'}, status=500)
 
+def main_thread_detail(request, game_id):
+    main_thread = MainThread.objects.get(game_id=game_id)
+    return render(request, 'main_thread_detail.html', {'main_thread': main_thread})
+
 def account_management(request):
     results = None
     form_submitted = False

@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% load static %} {% load i18n %} {% block content %}
+<h1>{{ main_thread.name }}</h1>
+{% if main_thread.summary_visible %}
+<p>{{ main_thread.summary }}</p>
+{% endif %} {% if main_thread.genres_visible %}
+<p>Genres: {{ main_thread.get_genres }}</p>
+{% endif %} {% if main_thread.platforms_visible %}
+<p>Platforms: {{ main_thread.get_platforms }}</p>
+{% endif %} {% if main_thread.involved_companies_visible %}
+<p>Involved Companies: {{ main_thread.get_involved_companies }}</p>
+{% endif %} {% if main_thread.game_engines_visible %}
+<p>Game Engines: {{ main_thread.get_game_engines }}</p>
+{% endif %} {% if main_thread.aggregated_rating_visible %}
+<p>Aggregated Rating: {{ main_thread.aggregated_rating }}</p>
+{% endif %} {% endblock %}
