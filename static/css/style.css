@@ -86,17 +86,14 @@ p {
 
 /* --------------- BOOTSTRAP STYLING ENDS --------------- */
 
-
-
 /*--------------- GENERAL LINK STYLING STARTS ---------------*/
-a,
-a:visited {
-    color: var(--secondary-colour);
+.result-link {
+    color: var(--primary-colour);
     text-decoration: none;
 }
 
-a:hover {
-    color: var(--primary-accent-colour);
+.result-link:hover {
+    color: var(--secondary-colour);
 }
 
 /*--------------- GENERAL LINK STYLING ENDS ---------------*/
@@ -190,7 +187,8 @@ a:hover {
     border-color: var(--secondary-colour);
 }
 
-.result-button {
+#homepageResultsContainer .result-button,
+#searchGamesForMainThread .result-button {
     display: inline-block;
     padding: 0.5rem 1rem;
     color: var(--primary-colour);
@@ -201,9 +199,10 @@ a:hover {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.result-button:hover {
+#homepageResultsContainer .result-button:hover,
+#searchGamesForMainThread .result-button:hover {
     color: var(--secondary-colour);
-    background-color: var(--primary-colour-hover);
+    background-color: var(--primary-colour);
     border-color: var(--secondary-colour);
 }
 
