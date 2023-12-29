@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.template.defaultfilters import slugify
 from datetime import datetime
 import json
 
@@ -10,6 +11,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class MainThread(models.Model):
     game_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
     genres = models.TextField(blank=True, null=True)
     platforms = models.TextField(blank=True, null=True)
     summary = models.TextField(blank=True, null=True)
@@ -17,6 +19,7 @@ class MainThread(models.Model):
     game_engines = models.TextField(blank=True, null=True)
     aggregated_rating = models.FloatField(blank=True, null=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     def set_genres(self, genres):
         self.genres = json.dumps(genres)
@@ -51,49 +54,36 @@ class MainThread(models.Model):
     game_engines_visible = models.BooleanField(default=False)
     aggregated_rating_visible = models.BooleanField(default=False)
 
-class Post(models.Model):
-    title = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
-    # on_delete=models.CASCADE means if the user is deleted,
-    # their blog posts will be deleted too
-    author = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="blog_posts"
-    )
-    updated_on = models.DateTimeField(auto_now=True)
-    content = models.TextField()
-    # featured_image = CloudinaryField('image', default='placeholder')
-    excerpt = models.TextField(blank=True)
-    created_on = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=STATUS, default=0)
-    likes = models.ManyToManyField(
-        User,
-        related_name='blog_likes',
-        blank=True
-    )
-
-    class Meta:
-        ordering = ['-created_on']
-
-    def __str__(self):
-        return self.title
-
-    def number_of_likes(self):
-        return self.likes.count()
-
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE,
-                             related_name="comments")
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
-    body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
+    game_id = models.ForeignKey(MainThread, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments',  null=True)
+    text = models.CharField(max_length=1000)
+    created_date = models.DateTimeField(auto_now_add=True)
+    upvotes = models.ManyToManyField('Upvote', blank=True, related_name='comments_upvoted')
+    downvotes = models.ManyToManyField('Downvote', blank=True, related_name='comments_downvoted')
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
 
     class Meta:
-        ordering = ["created_on"]
+        ordering = ['created_date']
 
     def __str__(self):
-        return f"Comment {self.body} by {self.name}"
+        return self.text
+
+class Upvote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='upvotes_from')
+
+    def __str__(self):
+        return f'Upvote by {self.user} on {self.comment}'
+
+class Downvote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='downvotes_from')
+
+    def __str__(self):
+        return f'Downvote by {self.user} on {self.comment}'

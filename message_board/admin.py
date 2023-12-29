@@ -1,24 +1,19 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import MainThread, Comment
 from django_summernote.admin import SummernoteModelAdmin
 
 
-@admin.register(Post)
-class PostAdmin(SummernoteModelAdmin):
-
-    list_display = ('title', 'slug', 'status', 'created_on')
-    search_fields = ['title', 'content']
-    list_filter = ('status', 'created_on')
-    prepopulated_fields = {'slug': ('title',)}
-    summernote_fields = ('content',)
+@admin.register(MainThread)
+class MainThreadAdmin(SummernoteModelAdmin):
+    list_display = ('game_id', 'name', 'status', 'created_date')
+    search_fields = ['name', 'summary']
+    list_filter = ('status', 'created_date')
+    prepopulated_fields = {'slug': ('name',)}
+    summernote_fields = ('summary',)
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'body', 'post', 'created_on', 'approved')
-    list_filter = ('approved', 'created_on')
-    search_fields = ('name', 'email', 'body')
-    actions = ['approve_comments']
-
-    def approve_comments(self, request, queryset):
-        queryset.update(approved=True)
+    list_display = ('user', 'text', 'game_id', 'created_date')
+    list_filter = ('created_date',)
+    search_fields = ('user__username', 'text')

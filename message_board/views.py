@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignupForm
-from .models import MainThread
+from .models import MainThread, Comment
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -35,6 +35,27 @@ def homepage_search_threads(request):
         return JsonResponse({'results': results_data})
     else:
         return JsonResponse({'no_results': True})
+
+@login_required
+def post_comment(request, game_id):
+    # Ensure the request is a POST request
+    if request.method == 'POST':
+        # Get the MainThread instance
+        mainthread = get_object_or_404(MainThread, game_id=game_id)
+
+        # Get the comment text from the form data
+        text = request.POST.get('text')
+
+        # Create a new Comment instance
+        Comment.objects.create(game_id=mainthread, user=request.user, text=text)
+
+        # Return a success response
+        return JsonResponse({'status': 'success'})
+
+    # If the request is not a POST request, return an error response
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+        
 
 def make_main_thread_search_request(query):
     endpoint = 'games'
