@@ -91,10 +91,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                     notificationToast.show();
                                 } else {
                                     // Handle success
-                                    toastBody.textContent = 'Signup successful! Redirecting to home page...';
+                                    toastBody.textContent = 'Signup successful! Redirecting to login page...';
                                     notificationToast.show();
                                     setTimeout(() => {
-                                        window.location.href = '/'; // Redirect to home page
+                                        window.location.href = '/account_management'; // Redirect to home page
                                     }, 2000); // Redirect after 2 seconds
                                 }
                             })
