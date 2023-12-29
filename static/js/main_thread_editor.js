@@ -173,6 +173,7 @@ $(document).ready(function () {
                         "game_engines",
                         "aggregated_rating",
                     ];
+
                     $.each(fields, function (j, field) {
                         var infoRow = $("<div>").addClass("info-row row");
 
@@ -183,9 +184,9 @@ $(document).ready(function () {
                             });
 
                         var titleCol = $("<div>")
-                            .addClass("info-title col")
+                            .addClass("info-title col-md-4")
                             .text(formattedField);
-                        var dataCol = $("<div>").addClass("info-data col");
+                        var dataCol = $("<div>").addClass("info-data col-md-4");
                         if (
                             [
                                 "genres",
@@ -208,7 +209,7 @@ $(document).ready(function () {
                             dataCol.text("N/A");
                         }
 
-                        var switchCol = $("<div>").addClass("info-toggle col form-switch");
+                        var switchCol = $("<div>").addClass("info-toggle col-md-4 form-switch");
                         var switchInput = $("<input>")
                             .addClass("form-check-input")
                             .attr("type", "checkbox")
@@ -234,13 +235,13 @@ $(document).ready(function () {
                     });
 
                     var publishButton = $("<button>")
-                        .addClass("action-button btn publish-button w-50")
+                        .addClass("action-button btn publish-button w-100 w-md-50")
                         .text("Publish Main Thread")
                         .attr("data-game-id", thread.game_id);
                     accordionBody.append(publishButton);
 
                     var unpublishButton = $("<button>")
-                        .addClass("action-button btn unpublish-button w-50")
+                        .addClass("action-button btn unpublish-button w-100 w-md-50")
                         .text("Unpublish Main Thread")
                         .attr("data-game-id", thread.game_id);
                     accordionBody.append(unpublishButton);
