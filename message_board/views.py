@@ -66,20 +66,40 @@ def search_created_main_threads(request):
     return JsonResponse(thread_list, safe=False)
 
 @require_POST
+def update_and_publish_thread(request):
+    try:
+        game_id = request.POST.get('game_id')
+        visibility_states = json.loads(request.POST.get('visibility_states'))
+
+        thread = MainThread.objects.get(game_id=game_id)
+        print('MainThread before:', thread.__dict__)
+
+        for field, is_visible in visibility_states.items():
+            setattr(thread, f'{field}_visible', is_visible)
+
+        thread.status = 1  # Change status to Published
+        thread.save()
+
+        print('MainThread after:', thread.__dict__)
+
+        return JsonResponse({'status': 'success'})
+    except MainThread.DoesNotExist:
+        return JsonResponse({'error': 'MainThread not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': 'An error occurred'}, status=500)
+
+@require_POST
 def delete_a_main_thread(request):
     try:
-        thread_id = request.POST.get('thread_id')
-        print('Thread ID:', thread_id)  # Log the thread ID
+        game_id = request.POST.get('game_id')
 
-        thread = MainThread.objects.get(id=thread_id)
+        thread = MainThread.objects.get(game_id=game_id)
         thread.delete()
 
         return JsonResponse({'status': 'success'})
     except MainThread.DoesNotExist:
-        print('MainThread not found')  # Log the error
         return JsonResponse({'error': 'MainThread not found'}, status=404)
     except Exception as e:
-        print('Error:', e)  # Log any other exceptions
         return JsonResponse({'error': 'An error occurred'}, status=500)
 
 # Account Management functions
