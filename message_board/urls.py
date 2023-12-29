@@ -18,4 +18,7 @@ urlpatterns = [
     path('homepage_search_threads/', views.homepage_search_threads, name='homepage_search_threads'),
     path('main_threads/<int:game_id>/', views.main_thread_detail, name='main_thread_detail'),
     path('post_comment/<int:game_id>/', views.post_comment, name='post_comment'),
+    path('comment/<int:comment_id>/reply', views.reply_to_comment, name='reply_to_comment'),
+    path('comment/<int:comment_id>/upvote', views.upvote_comment, name='upvote_comment'),
+    path('comment/<int:comment_id>/downvote', views.downvote_comment, name='downvote_comment'),
 ]
