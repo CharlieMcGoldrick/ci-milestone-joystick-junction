@@ -89,7 +89,7 @@ $(document).ready(function () {
                     }
                     form.append(
                         $("<button>")
-                            .addClass("result-button btn btn-primary w-100")
+                            .addClass("btn result-button w-100")
                             .text("Create Main Thread " + game.name)
                     );
 
@@ -174,6 +174,8 @@ $(document).ready(function () {
                         "aggregated_rating",
                     ];
 
+                    console.log(thread);
+
                     $.each(fields, function (j, field) {
                         var infoRow = $("<div>").addClass("info-row row");
 
@@ -187,24 +189,26 @@ $(document).ready(function () {
                             .addClass("info-title col-md-4")
                             .text(formattedField);
                         var dataCol = $("<div>").addClass("info-data col-md-4");
-                        if (
-                            [
-                                "genres",
-                                "platforms",
-                                "involved_companies",
-                                "game_engines",
-                            ].includes(field) &&
-                            thread[field]
-                        ) {
-                            var parsedData = JSON.parse(thread[field]);
-                            var names = parsedData
-                                .map((item) => item.name || item.company.name)
-                                .join(", ");
-                            dataCol.text(names);
-                        } else if (field === "aggregated_rating" && thread[field]) {
-                            dataCol.text(Math.floor(thread[field])); // Round down the rating
-                        } else if (thread[field]) {
-                            dataCol.text(thread[field]);
+
+                        if (thread[field] && thread[field] !== "[]") {
+                            if (
+                                [
+                                    "genres",
+                                    "platforms",
+                                    "involved_companies",
+                                    "game_engines",
+                                ].includes(field)
+                            ) {
+                                var parsedData = JSON.parse(thread[field]);
+                                var names = parsedData
+                                    .map((item) => item.name || item.company.name)
+                                    .join(", ");
+                                dataCol.text(names);
+                            } else if (field === "aggregated_rating") {
+                                dataCol.text(Math.floor(thread[field])); // Round down the rating
+                            } else {
+                                dataCol.text(thread[field]);
+                            }
                         } else {
                             dataCol.text("N/A");
                         }
@@ -231,7 +235,9 @@ $(document).ready(function () {
                             switchLabel.css("color", "#6c757d"); // Set the label color to grey
                         }
 
-                        accordionBody.append(infoRow);
+                        if (dataCol.text() !== "N/A") {
+                            accordionBody.append(infoRow);
+                        }
                     });
 
                     var publishButton = $("<button>")
