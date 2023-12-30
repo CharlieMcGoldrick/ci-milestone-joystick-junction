@@ -1,30 +1,15 @@
 {% extends "base.html" %} {% load static %} {% load i18n %} {% block content %}
-<h1>{{ main_thread.name }}</h1>
+<h1 class="px-2 pb-2">{{ main_thread.name }}</h1>
 
-<div class="header-info">
-  {% if main_thread.genres_visible %}
-  <p>Genres: {{ main_thread.get_genres }}</p>
-  {% endif %} {% if main_thread.platforms_visible %}
-  <p>Platforms: {{ main_thread.get_platforms }}</p>
-  {% endif %} {% if main_thread.involved_companies_visible %}
-  <p>Involved Companies: {{ main_thread.get_involved_companies }}</p>
-  {% endif %} {% if main_thread.game_engines_visible %}
-  <p>Game Engines: {{ main_thread.get_game_engines }}</p>
-  {% endif %} {% if main_thread.aggregated_rating_visible %}
-  <p>Aggregated Rating: {{ main_thread.aggregated_rating }}</p>
-  {% endif %}
-</div>
-
-<!-- Tabs -->
-<div class="d-flex">
+<div id="main-thread-tabs" class="d-flex">
   <div
-    class="flex-column nav nav-pills me-3"
+    class="flex-column nav nav-pills"
     id="v-pills-tab"
     role="tablist"
     aria-orientation="vertical"
   >
     <button
-      class="nav-link active"
+      class="nav-link active rotated-tab"
       id="v-pills-about-tab"
       data-bs-toggle="pill"
       data-bs-target="#v-pills-about"
@@ -33,10 +18,10 @@
       aria-controls="v-pills-about"
       aria-selected="true"
     >
-      About
+      <span class="tab-text">About</span>
     </button>
     <button
-      class="nav-link"
+      class="nav-link rotated-tab"
       id="v-pills-discussion-tab"
       data-bs-toggle="pill"
       data-bs-target="#v-pills-discussion"
@@ -45,20 +30,32 @@
       aria-controls="v-pills-discussion"
       aria-selected="false"
     >
-      Main Discussion
+      <span class="tab-text">Main Discussion</span>
     </button>
   </div>
 
-  <div class="tab-content" id="v-pills-tabContent">
+  <div class="tab-content mx-2" id="v-pills-tabContent">
     <div
       class="tab-pane fade show active"
       id="v-pills-about"
       role="tabpanel"
       aria-labelledby="v-pills-about-tab"
     >
-      {% if main_thread.summary_visible %}
-      <p>{{ main_thread.summary }}</p>
-      {% endif %}
+      <div class="header-info">
+        {% if main_thread.summary_visible %}
+        <p>{{ main_thread.summary }}</p>
+        {% endif %} {% if main_thread.genres_visible %}
+        <p>Genres: {{ main_thread.genres }}</p>
+        {% endif %} {% if main_thread.platforms_visible %}
+        <p>Platforms: {{ main_thread.platforms }}</p>
+        {% endif %} {% if main_thread.involved_companies_visible %}
+        <p>Involved Companies: {{ main_thread.involved_companies }}</p>
+        {% endif %} {% if main_thread.game_engines_visible %}
+        <p>Game Engines: {{ main_thread.game_engines }}</p>
+        {% endif %} {% if main_thread.aggregated_rating_visible %}
+        <p>Aggregated Rating: {{ main_thread.aggregated_rating }}</p>
+        {% endif %}
+      </div>
     </div>
     <div
       class="tab-pane fade"
@@ -66,43 +63,86 @@
       role="tabpanel"
       aria-labelledby="v-pills-discussion-tab"
     >
-      <!-- Main discussion content goes here -->
       <form method="post" action="{% url 'post_comment' main_thread.game_id %}">
         {% csrf_token %}
-        <textarea name="text" required></textarea>
-        <button type="submit">Post Comment</button>
+        <div class="mb-3">
+          <textarea class="form-control" name="text" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Post Comment</button>
       </form>
 
       <!-- Display existing comments -->
       {% for comment in main_thread.comments.all %}
-      <div class="comment">
+      <div class="comment gradient-box mt-3">
         <p>{{ comment.text }}</p>
-        <p>
-          Posted by {{ comment.user.username }} on {{ comment.created_date }}
+
+        <div class="vote-buttons mb-3">
+          <!-- Upvote form -->
+          <form method="post" action="{% url 'upvote_comment' comment.id %}">
+            {% csrf_token %}
+            <button class="vote-button" type="submit">
+              <i class="fa-solid fa-angle-up vote-icon"></i>
+            </button>
+          </form>
+
+          <!-- Downvote form -->
+          <form method="post" action="{% url 'downvote_comment' comment.id %}">
+            {% csrf_token %}
+            <button class="vote-button" type="submit">
+              <i class="fa-solid fa-angle-down vote-icon"></i>
+            </button>
+          </form>
+        </div>
+
+        <p class="comment-details">
+          {{ comment.user.username }} on {{ comment.created_date }}
         </p>
 
         <!-- Reply form -->
-        <form method="post" action="{% url 'reply_to_comment' comment.id %}">
+        <form
+          class="replies"
+          method="post"
+          action="{% url 'reply_to_comment' comment.id %}"
+        >
           {% csrf_token %}
-          <textarea name="text" required></textarea>
-          <button type="submit">Reply</button>
+          <div class="mb-3">
+            <textarea class="form-control" name="text" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Reply</button>
         </form>
 
-        <!-- Upvote form -->
-        <form method="post" action="{% url 'upvote_comment' comment.id %}">
-          {% csrf_token %}
-          <button type="submit">Upvote</button>
-        </form>
+        <!-- Replies container -->
+        <div class="replies mt-3">
+          {% for reply in comment.replies.all %}
+          <div class="reply">
+            <p>{{ reply.text }}</p>
 
-        <!-- Downvote form -->
-        <form method="post" action="{% url 'downvote_comment' comment.id %}">
-          {% csrf_token %}
-          <button type="submit">Downvote</button>
-        </form>
+            <div class="vote-buttons mb-3">
+              <!-- Reply Upvote form -->
+              <form method="post" action="{% url 'upvote_reply' reply.id %}">
+                {% csrf_token %}
+                <button class="vote-button" type="submit">
+                  <i class="fa-solid fa-angle-up vote-icon"></i>
+                </button>
+              </form>
+
+              <!-- Reply Downvote form -->
+              <form method="post" action="{% url 'downvote_reply' reply.id %}">
+                {% csrf_token %}
+                <button class="vote-button" type="submit">
+                  <i class="fa-solid fa-angle-down vote-icon"></i>
+                </button>
+              </form>
+            </div>
+
+            <p class="comment-details">
+              {{ reply.user.username }} on {{ reply.created_date }}
+            </p>
+          </div>
+          {% endfor %}
+        </div>
       </div>
-      {% endfor %}
+      {% endfor %} {% endblock %}
     </div>
   </div>
 </div>
-
-{% endblock %}
