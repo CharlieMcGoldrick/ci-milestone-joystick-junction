@@ -387,6 +387,11 @@ Databases
 
 <h3>Known Bugs</h3>
 
+- The switch buttons on the accordion don't actually reflect the boolean value which is being sent via the server
+- Sticky-top isn't working, I think this is a bootstrap issue
+- All posts on the Main Thread Detail page redirect back to the page, which is a bnd user experience compared to other parts of the website
+- Upvotes need to have a number displayed next to them that increases when they're clicked
+
 <h3>Fixed Bugs</h3>
 
 - Fix: Handling 'account_management' View
