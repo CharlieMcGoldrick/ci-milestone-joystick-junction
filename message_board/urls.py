@@ -47,4 +47,10 @@ urlpatterns = [
     path('comment/<int:comment_id>/downvote',
          views.downvote_comment,
          name='downvote_comment'),
+    path('upvote_reply/<int:reply_id>/',
+        views.upvote_reply,
+        name='upvote_reply'),
+    path('downvote_reply/<int:reply_id>/',
+     views.downvote_reply,
+     name='downvote_reply'),
 ]
