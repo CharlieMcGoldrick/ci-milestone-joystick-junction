@@ -1,9 +1,11 @@
 $(document).ready(function () {
+    // When the search form is submitted
     $("#searchFormFindGame").on("submit", function (e) {
         e.preventDefault();
 
         var formData = $(this).serializeArray();
 
+        // Send an AJAX request to the server
         $.ajax({
             url: $(this).data("url"),
             data: $(this).serialize(),
@@ -11,12 +13,14 @@ $(document).ready(function () {
                 var searchGamesForMainThread = $("#searchGamesForMainThread");
                 searchGamesForMainThread.empty();
 
+                // For each game returned by the server
                 $.each(data, function (i, game) {
                     var listItem = $("<li>").addClass("result-item");
                     if (i === 0) {
                         listItem.addClass("first-result-item");
                     }
 
+                    // Create a form for creating a new thread for the game
                     var form = $("<form>")
                         .addClass("create-thread-form")
                         .attr("method", "post")
@@ -31,6 +35,7 @@ $(document).ready(function () {
                             .val(getCookie("csrftoken"))
                     );
 
+                    // Add hidden inputs for each game attribute
                     if (game.name) {
                         form.append(
                             $("<input>")
@@ -87,6 +92,8 @@ $(document).ready(function () {
                                 .val(game.aggregated_rating)
                         );
                     }
+
+                    // Add a button to create a new thread for the game
                     form.append(
                         $("<button>")
                             .addClass("btn result-button w-100")
@@ -100,16 +107,19 @@ $(document).ready(function () {
         });
     });
 
+    // When a thread creation form is submitted
     $(document).on("submit", ".create-thread-form", function (e) {
         e.preventDefault();
 
         var formData = $(this).serializeArray();
         var jsonData = {};
 
+        // Convert form data to JSON
         $.each(formData, function (i, field) {
             jsonData[field.name] = field.value;
         });
 
+        // Send an AJAX request to the server to create a new thread
         $.ajax({
             url: $(this).attr("action"),
             type: "POST",
@@ -129,9 +139,11 @@ $(document).ready(function () {
         });
     });
 
+    // When the form with id "searchFormMainThread" is submitted
     $("#searchFormMainThread").on("submit", function (e) {
         e.preventDefault();
 
+        // Send an AJAX request to the server
         $.ajax({
             url: $(this).data("url"),
             data: $(this).serialize(),
@@ -139,14 +151,18 @@ $(document).ready(function () {
                 var searchCreatedMainThreads = $("#searchCreatedMainThreads");
                 searchCreatedMainThreads.empty();
 
+                // For each thread returned by the server
                 $.each(data, function (i, thread) {
                     var accordionItem = $("<div>")
                         .addClass("accordion-item mb-3")
                         .attr("id", "thread-" + thread.game_id);
 
+                    // Create an accordion item for the thread
                     var accordionHeader = $("<h2>")
                         .addClass("accordion-header")
                         .attr("id", "heading" + i);
+
+                    // Create an accordion button for the thread
                     var accordionButton = $("<button>")
                         .addClass("accordion-button collapsed")
                         .attr("type", "button")
@@ -157,6 +173,7 @@ $(document).ready(function () {
                         .text(thread.name);
                     accordionHeader.append(accordionButton);
 
+                    // Create an accordion collapse for the thread
                     var accordionCollapse = $("<div>")
                         .attr("id", "collapse" + i)
                         .addClass("accordion-collapse collapse")
@@ -164,6 +181,7 @@ $(document).ready(function () {
                         .attr("data-bs-parent", "#searchCreatedMainThreads");
                     var accordionBody = $("<div>").addClass("accordion-body");
 
+                    // Define the fields to display for the thread
                     var fields = [
                         "name",
                         "summary",
@@ -174,9 +192,9 @@ $(document).ready(function () {
                         "aggregated_rating",
                     ];
 
-                    console.log(thread);
-
+                    // For each field
                     $.each(fields, function (j, field) {
+                        // Create a row for the field
                         var infoRow = $("<div>").addClass("info-row row");
 
                         var formattedField = field
@@ -240,18 +258,21 @@ $(document).ready(function () {
                         }
                     });
 
+                    // Create a button to publish the thread
                     var publishButton = $("<button>")
                         .addClass("action-button btn publish-button w-100 w-md-50")
                         .text("Publish Main Thread")
                         .attr("data-game-id", thread.game_id);
                     accordionBody.append(publishButton);
 
+                    // Create a button to unpublish the thread
                     var unpublishButton = $("<button>")
                         .addClass("action-button btn unpublish-button w-100 w-md-50")
                         .text("Unpublish Main Thread")
                         .attr("data-game-id", thread.game_id);
                     accordionBody.append(unpublishButton);
 
+                    // Create a button to delete the thread
                     var deleteButton = $("<button>")
                         .addClass("action-button btn delete-button w-100")
                         .text("Delete Main Thread")
@@ -267,18 +288,20 @@ $(document).ready(function () {
         });
     });
 
+    // When a publish button is clicked
     $(document).on("click", ".publish-button", function () {
-        var game_id = $(this).data("game-id");
+        var game_id = $(this).data("game-id");  // Get the game id from the button's data
 
-        var visibilityStates = {};
-        var checkboxes = $("#thread-" + game_id + " .form-check-input");
+        var visibilityStates = {}; // Initialize an object to store the visibility states
+        var checkboxes = $("#thread-" + game_id + " .form-check-input"); // Get all checkboxes for the thread
 
         checkboxes.each(function () {
-            var field = $(this).attr("id").replace("Switch", "");
-            var is_checked = $(this).is(":checked");
-            visibilityStates[field] = is_checked;
+            var field = $(this).attr("id").replace("Switch", ""); // Get the field name from the checkbox id
+            var is_checked = $(this).is(":checked"); // Check if the checkbox is checked
+            visibilityStates[field] = is_checked; // Store the visibility state for the field
         });
 
+        // Send an AJAX request to the server to update and publish the thread
         $.ajax({
             url: "/update_and_publish_thread/",
             method: "POST",
@@ -291,30 +314,33 @@ $(document).ready(function () {
                 var toastEl = document.getElementById("notificationToast");
                 var toast = new bootstrap.Toast(toastEl);
                 toastEl.querySelector(".toast-body").textContent = response.status;
-                toast.show();
+                toast.show(); // Show a toast notification with the server's response
             },
             error: function (response) {
                 var toastEl = document.getElementById("notificationToast");
                 var toast = new bootstrap.Toast(toastEl);
                 toastEl.querySelector(".toast-body").textContent =
                     response.responseJSON.error;
-                toast.show();
+                toast.show(); // Show a toast notification with the server's error message
             },
         });
     });
 
+    // When an unpublish button is clicked
     $(document).on("click", ".unpublish-button", function () {
-        var game_id = $(this).data("game-id");
+        var game_id = $(this).data("game-id"); // Get the game id from the button's data
 
-        var visibilityStates = {};
-        var checkboxes = $("#thread-" + game_id + " .form-check-input");
+        var visibilityStates = {}; // Initialize an object to store the visibility states
+        var checkboxes = $("#thread-" + game_id + " .form-check-input"); // Get all checkboxes for the thread
 
+        // For each checkbox
         checkboxes.each(function () {
             var field = $(this).attr("id").replace("Switch", "");
             var is_checked = $(this).is(":checked");
             visibilityStates[field] = is_checked;
         });
 
+        // Send an AJAX request to the server to update and unpublish the thread
         $.ajax({
             url: "/update_and_unpublish_thread/",
             method: "POST",
@@ -339,13 +365,16 @@ $(document).ready(function () {
         });
     });
 
+    // When a delete button is clicked
     $(document).on("click", ".delete-button", function () {
         var game_id = $(this).data("game-id");
         var button = $(this);
 
-        $("#deleteModal").modal("show");
+        $("#deleteModal").modal("show"); // Show the delete confirmation modal
 
+        // When the confirm delete button is clicked
         $("#confirmDelete").off("click").on("click", function () {
+            // Send an AJAX request to the server to delete the thread
             $.ajax({
                 url: "/delete_a_main_thread/",
                 method: "POST",
@@ -354,8 +383,8 @@ $(document).ready(function () {
                     csrfmiddlewaretoken: getCookie("csrftoken"),
                 },
                 success: function () {
-                    button.closest(".accordion-item").remove();
-                    $("#deleteModal").modal("hide");
+                    button.closest(".accordion-item").remove(); // Remove the thread from the page
+                    $("#deleteModal").modal("hide"); // Hide the delete confirmation modal
                 },
             });
         });
