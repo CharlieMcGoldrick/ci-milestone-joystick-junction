@@ -63,12 +63,13 @@
       role="tabpanel"
       aria-labelledby="v-pills-discussion-tab"
     >
+      <!-- Post Comment Form -->
       <form method="post" action="{% url 'post_comment' main_thread.game_id %}">
         {% csrf_token %}
         <div class="mb-3">
           <textarea class="form-control" name="text" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Post Comment</button>
+        <button type="submit" class="btn result-button">Post Comment</button>
       </form>
 
       <!-- Display existing comments -->
@@ -108,7 +109,7 @@
           <div class="mb-3">
             <textarea class="form-control" name="text" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Reply</button>
+          <button type="submit" class="btn result-button">Reply</button>
         </form>
 
         <!-- Replies container -->
