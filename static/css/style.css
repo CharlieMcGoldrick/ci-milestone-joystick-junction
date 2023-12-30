@@ -1,11 +1,11 @@
 /* Import fonts  */
-@import url('fonts.css');
+@import url("fonts.css");
 
 /*--------------- COLOUR VARIABLES STARTS ---------------*/
 :root {
     --primary-colour: #0c0c0e;
     --secondary-colour: #ffffff;
-    --primary-background-colour: #0E1230;
+    --primary-background-colour: #0e1230;
     --secondary-background-colour: #070817;
     --primary-accent-colour: #1c67fd;
     --secondary-accent-colour: #104334;
@@ -24,7 +24,7 @@
 
 /* --------------- GLOBAL STYLING STARTS --------------- */
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     background-color: var(--primary-colour);
     color: var(--secondary-colour);
 }
@@ -35,7 +35,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Roboto Slab', serif;
+    font-family: "Roboto Slab", serif;
     line-height: 1;
     font-weight: 600;
 }
@@ -124,15 +124,14 @@ p {
     transform: translate(-50%, -50%);
     width: 30px;
     height: 40px;
-    background: url('/static/images/joystick_junction_logo_50x50.png') no-repeat center/cover;
+    background: url("/static/images/joystick_junction_logo_50x50.png") no-repeat center/cover;
 }
 
 .logo-container:hover {
-    background-image: url('/static/images/joystick_junction_logo_hover_50x50.png');
+    background-image: url("/static/images/joystick_junction_logo_hover_50x50.png");
 }
 
 /* --------------- NAVBAR STYLING ENDS --------------- */
-
 
 /* --------------- ACCOUNT MANAGEMENT STYLING STARTS --------------- */
 .content-padding {
@@ -140,7 +139,7 @@ p {
 }
 
 .card {
-    background: radial-gradient(circle at top, #0E1230, #070817);
+    background: radial-gradient(circle at top, #0e1230, #070817);
     border: 1px solid var(--primary-accent-colour);
 }
 
@@ -228,7 +227,7 @@ p {
 }
 
 .accordion-button {
-    color: var(--primary-colour)
+    color: var(--primary-colour);
 }
 
 .accordion-item {
@@ -275,3 +274,77 @@ p {
 }
 
 /* --------------- ADMIN STYLING ENDS --------------- */
+
+/* --------------- MAIN THREAD DETAIL STYLING STARTS --------------- */
+#main-thread-tabs .rotated-tab {
+    padding: 1rem;
+    color: var(--primary-colour);
+    background-color: var(--secondary-colour);
+    border: 1px solid var(--primary-accent-colour);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-thread-tabs .rotated-tab:hover,
+#main-thread-tabs .rotated-tab.active {
+    color: var(--secondary-colour);
+    background-color: var(--primary-colour);
+    border-color: var(--secondary-colour);
+}
+
+#main-thread-tabs .tab-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+
+textarea {
+    resize: horizontal;
+}
+
+.gradient-box {
+    background: radial-gradient(circle at top, #0e1230, #070817);
+    padding: 15px;
+    border-radius: 5px;
+    color: var(--secondary-colour);
+    border: 2px solid var(--primary-accent-colour)
+}
+
+.comment-details {
+    font-size: 0.7rem;
+    font-style: italic;
+}
+
+.replies {
+    margin-left: 20px;
+}
+
+.reply::before {
+    content: "";
+    display: block;
+    border-top: 1px solid var(--primary-accent-colour);
+    width: 75%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+.vote-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.vote-button {
+    background: radial-gradient(circle at top, #0e1230, #070817);
+    border: none;
+    padding: 10px;
+}
+
+.vote-icon {
+    color: var(--secondary-colour);
+    font-size: 24px;
+}
+
+/* --------------- MAIN THREAD DETAIL STYLING ENDS --------------- */
