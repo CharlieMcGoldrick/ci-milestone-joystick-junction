@@ -37,6 +37,20 @@ def homepage_search_threads(request):
     else:
         return JsonResponse({'no_results': True})
 
+def main_thread_detail(request, game_id):
+    main_thread = MainThread.objects.get(game_id=game_id)
+
+    # Convert the data into a clean format
+    main_thread.genres = ', '.join([genre['name'] for genre in json.loads(main_thread.genres)])
+    main_thread.platforms = ', '.join([platform['name'] for platform in json.loads(main_thread.platforms)])
+    main_thread.involved_companies = ', '.join([company['company']['name'] for company in json.loads(main_thread.involved_companies)])
+    main_thread.game_engines = ', '.join([engine['name'] for engine in json.loads(main_thread.game_engines)])
+
+    # Round down the aggregated rating
+    main_thread.aggregated_rating = round(main_thread.aggregated_rating)
+
+    return render(request, 'main_thread_detail.html', {'main_thread': main_thread})
+
 @login_required
 def post_comment(request, game_id):
     # Ensure the request is a POST request
@@ -184,10 +198,6 @@ def delete_a_main_thread(request):
         return JsonResponse({'error': 'MainThread not found'}, status=404)
     except Exception as e:
         return JsonResponse({'error': 'An error occurred'}, status=500)
-
-def main_thread_detail(request, game_id):
-    main_thread = MainThread.objects.get(game_id=game_id)
-    return render(request, 'main_thread_detail.html', {'main_thread': main_thread})
 
 def account_management(request):
     results = None
