@@ -99,6 +99,23 @@ def downvote_comment(request, comment_id):
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
 
+@login_required
+def upvote_reply(request, reply_id):
+    if request.method == 'POST':
+        reply = get_object_or_404(Reply, id=reply_id)
+        ReplyUpvote.objects.create(user=request.user, reply=reply)
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+
+@login_required
+def downvote_reply(request, reply_id):
+    if request.method == 'POST':
+        reply = get_object_or_404(Reply, id=reply_id)
+        ReplyDownvote.objects.create(user=request.user, reply=reply)
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
 
 def make_main_thread_search_request(query):
     endpoint = 'games'

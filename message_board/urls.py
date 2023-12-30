@@ -22,4 +22,6 @@ urlpatterns = [
     path('comment/<int:comment_id>/reply', views.reply_to_comment, name='reply_to_comment'),
     path('comment/<int:comment_id>/upvote', views.upvote_comment, name='upvote_comment'),
     path('comment/<int:comment_id>/downvote', views.downvote_comment, name='downvote_comment'),
+    path('reply/<int:reply_id>/upvote', views.upvote_reply, name='upvote_reply'),
+    path('reply/<int:reply_id>/downvote', views.downvote_reply, name='downvote_reply'),
 ]
