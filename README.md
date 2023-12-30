@@ -463,10 +463,10 @@ Updated the redirect in the reply_to_comment view to pass the game_id as an inte
 </details>
 
 <details>
-<summary><h4>Code Validation</h4></summary>
+<summary><h2>Code Validation</h2></summary>
 
 <details>
-<summary><h5>HTML Validation</h5></summary>
+<summary><h3>HTML Validation</h3></summary>
 
 **I've valididated my HTML using [validator.w3.org](https://validator.w3.org/#validate_by_input)**
 
@@ -483,7 +483,7 @@ Updated the redirect in the reply_to_comment view to pass the game_id as an inte
 </details>
 
 <details>
-<summary><h5>CSS Validation</h5></summary>
+<summary><h3>CSS Validation</h3></summary>
 
 **I've valididated my CSS using [jigsaw.w3.org/css](https://jigsaw.w3.org/css-validator/#validate_by_input)**
 
@@ -494,7 +494,7 @@ Updated the redirect in the reply_to_comment view to pass the game_id as an inte
 </details>
 
 <details>
-<summary><h5>JS Validation</h5></summary>
+<summary><h3>JS Validation</h3></summary>
 
 **I've valididated my JS using [jshint](https://jshint.com/)**
 
@@ -573,7 +573,7 @@ Two undefined variables which are used elsewhere.
 </details>
 
 <details>
-<summary><h5>Python Validation</h5></summary>
+<summary><h3>Python Validation</h3></summary>
 
 **I've valididated my Python using [pep8ci](https://pep8ci.herokuapp.com/)**
 
@@ -583,7 +583,7 @@ All python code is to PEP 8 standard
 </details>
 
 <details>
-<summary><h5>Unit Testing</h5></summary>
+<summary><h2>Unit Testing</h2></summary>
 
 ![Homepage Tests](/static/images/readme/unit_testing/homepage-tests.png)
 
@@ -592,5 +592,73 @@ All python code is to PEP 8 standard
 ![Account Management Logged In Tests](/static/images/readme/unit_testing/account-management-logged-in-tests.png)
 
 ![Main Thread Detail Test](/static/images/readme/unit_testing/main-thread-detail-tests.png)
+
+</details>
+
+
+<details>
+<summary><h2>Deployment</h2></summary>
+
+## Heroku Deployment
+
+1. **Create a Heroku Account:**
+   - Navigate to [Heroku](https://www.heroku.com/) and create an account.
+
+2. **Create a New Heroku App:**
+   - Click the "New" button in the top right corner.
+   - Select "Create New App."
+
+3. **Set App Name and Region:**
+   - Enter your desired app name.
+   - Select your preferred region.
+   - Click "Create App."
+
+4. **Set up your IGDB details**
+   - You can do this on their [Getting Started](https://api-docs.igdb.com/#getting-started)
+
+5. **Configure Environment Variables:**
+   - Go to the "Settings" tab.
+   - Click "Reveal Config Vars."
+   - You may need the following environment variables:
+     - `SECRET_KEY`: Your secret key
+     - `DATABASE_URL`: You elephantsql or other database
+     - `DJANGO_DATABASE_PASSWORD`: Your Django Database Password
+     - `DJANGO_DATABASE_USER`: Your Django Database User
+     - `EMAIL_HOST_USER`: Your email address
+     - `EMAIL_HOST_PASS`: Your email app password
+     - `PORT`: 8000
+     - `TWITCH_CLIENT_ID`: Your twitch API client ID
+     - `TWITCH_CLIENT_SECRET`: Your Twitch Client Secret
+
+6. **Deploy the App:**
+   - Go to the "Deploy" tab.
+   - Scroll down to "Connect to GitHub" and sign in/authorize when prompted.
+   - In the search box, find the repository you want to deploy and click "Connect."
+   - Scroll down to "Manual Deploy" and choose the main branch.
+     - You can turn on automatic deploymants here
+   - Click "Deploy."
+
+7. **Access the Live App:**
+   - The app should now be deployed.
+
+***Clone a GitHub Repository***
+To make a clone of this repository, follow these steps:
+Login to your GitHub account.
+
+1. Go to the repository by visiting the link: [Charlie McGoldrick Github - Joystick Junction Repo](https://github.com/CharlieMcGoldrick/ci-ms4-joystick-junction).
+2. Click the "Code" button and then use the copy button next to the link to copy the link.
+3. In your IDE of choice, open a new terminal and use the following clone command: git clone `https://github.com/CharlieMcGoldrick/ci-ms4-joystick-junction`.
+4. You will now have a copy of the repository in you local version.
+
+***Forking the GitHub Repository***
+To fork this repository, follow these steps:
+
+1. Log in to your GitHub account.
+2. Go to the repository you want to fork, which is located at: [Charlie McGoldrick Github - Joystick Junction Repo](https://github.com/CharlieMcGoldrick/ci-ms4-joystick-junction).
+3. In the top-right corner of the repository page, click on the "Fork" button
+4. GitHub will prompt you to select where you want to fork the repository. Choose your personal account or organization.
+5. Wait for the forking process to complete. Once it's done, you will be redirected to your forked repository under your GitHub account.
+
+NOTE: Any changes pushed to the main branch automatically show up on the website.
 
 </details>
