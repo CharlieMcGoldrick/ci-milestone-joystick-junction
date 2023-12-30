@@ -11,13 +11,16 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import ValidationError
 from datetime import datetime
 from .api.api import make_igdb_api_request
-from django.db.models import Q
+from django.db.models import Q, Count
 import json 
 
 def home(request):
     main_threads = MainThread.objects.filter(status=1)
+    popular_threads = MainThread.objects.filter(status=1).annotate(
+        num_comments=Count('comments') + Count('comments__replies')
+    ).order_by('-num_comments')[:5]
     new_threads = MainThread.objects.filter(status=1).order_by('-created_date')[:5]
-    return render(request, 'index.html', {'main_threads': main_threads, 'new_threads': new_threads})
+    return render(request, 'index.html', {'main_threads': main_threads, 'new_threads': new_threads, 'popular_threads': popular_threads})
 
 def homepage_search_threads(request):
     query = request.GET.get('search')

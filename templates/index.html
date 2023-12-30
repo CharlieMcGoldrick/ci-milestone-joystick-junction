@@ -32,30 +32,11 @@
 
         <!-- Thread Panels -->
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="card mb-3 card-spacing">
               <div class="card-body">
-                <h2>Popular Games</h2>
-                {% for main_thread in main_threads %}
-                <div class="thread">
-                  <h3>
-                    <a
-                      href="{% url 'main_thread_detail' game_id=main_thread.game_id %}"
-                      >{{ main_thread.name }}</a
-                    >
-                  </h3>
-                </div>
-                {% empty %}
-                <p>No threads have been created yet.</p>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-3 card-spacing">
-              <div class="card-body">
-                <h2>New Threads</h2>
-                {% for main_thread in new_threads %}
+                <h2>Trending Threads</h2>
+                {% for main_thread in popular_threads %}
                 <div class="thread">
                   <h3>
                     <a
@@ -71,17 +52,18 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="card mb-3 card-spacing">
               <div class="card-body">
-                <h2>Trending Discussion</h2>
-                {% for main_thread in main_threads %}
+                <h2>New Threads</h2>
+                {% for main_thread in new_threads %}
                 <div class="thread">
                   <h3>
                     <a
                       href="{% url 'main_thread_detail' game_id=main_thread.game_id %}"
-                      >{{ main_thread.name }}</a
                     >
+                      {{ main_thread.name }}
+                    </a>
                   </h3>
                 </div>
                 {% empty %}
