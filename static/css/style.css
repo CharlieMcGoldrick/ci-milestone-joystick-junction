@@ -275,6 +275,30 @@ p {
 
 /* --------------- ADMIN STYLING ENDS --------------- */
 
+/* --------------- HOME STYLING STARTS --------------- */
+.thread-title {
+    color: var(--secondary-colour);
+}
+
+.thread-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: var(--primary-colour);
+    background-color: var(--secondary-colour);
+    border: 1px solid var(--primary-accent-colour);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.thread-link:hover {
+    color: var(--secondary-colour);
+    background-color: var(--primary-colour);
+    border-color: var(--secondary-colour);
+}
+
+/* --------------- HOME STYLING ENDS --------------- */
+
 /* --------------- MAIN THREAD DETAIL STYLING STARTS --------------- */
 #main-thread-tabs .rotated-tab {
     padding: 1rem;
