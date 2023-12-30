@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignupForm
-from .models import MainThread, Comment
+from .models import MainThread, Comment, Upvote, Downvote, Reply, ReplyUpvote, ReplyDownvote
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.views import LoginView
@@ -76,7 +76,7 @@ def reply_to_comment(request, comment_id):
     if request.method == 'POST':
         parent_comment = get_object_or_404(Comment, id=comment_id)
         text = request.POST.get('text')
-        Comment.objects.create(game_id=parent_comment.game_id, user=request.user, text=text, parent=parent_comment)
+        Reply.objects.create(comment=parent_comment, user=request.user, text=text)
         return JsonResponse({'status': 'success'})
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)
