@@ -144,13 +144,14 @@ Join Joystick Junction to be part of a dynamic community where your voice matter
 ![Joystick Junction Tradeoff Table](/static/images/readme/uxd/strategy/joystick_junction_strategy-tradeoffs-table.png)
 
 ![Joystick Junction Tradeoff Graph](/static/images/readme/uxd/strategy/joystick_junction_strategy_tradeoffs_graph.png)
+
 </details>
 </details>
 
 <details>
 <summary><h3>Scope</h3></summary>
 
-#### Sprint 1 Features ####
+#### Sprint 1 Features
 
 ##### Must Have
 
@@ -180,13 +181,13 @@ Join Joystick Junction to be part of a dynamic community where your voice matter
 - Participate in Community Discussions
 - View Game Reviews and Ratings
 
-#### Sprint 1 Requirement Types ####
+#### Sprint 1 Requirement Types
 
 - Languages: HTML, CSS, JavaScript Python
 - Frameworks: Django
 - Database: Psycopg, Elephant SQL
 
-#### Future Sprint Features ####
+#### Future Sprint Features
 
 - Collect User Feedback
 - Generate Engagement Reports
@@ -203,7 +204,8 @@ Join Joystick Junction to be part of a dynamic community where your voice matter
 - Developer Profile Creation
 - Resume Discussions (Returning Visitor)
 
-#### Future Sprint Requirement Types ####
+#### Future Sprint Requirement Types
+
 - Languages: HTML, CSS, JavaScript Python
 - Frameworks: Django
 - Database: Psycopg, Elephant SQL
@@ -339,18 +341,20 @@ For the body text, I'm pairing it with Open Sans, another sans-serif font that c
 <summary><h5>Languages, Frameworks, Databases</h5></summary>
 
 Languages
+
 - HTML
 - CSS
 - Javascript
 - Python
 
-
 Frameworks
+
 - Django
   - [DJ Databse](https://pypi.org/project/dj-database-url/)
   - [Django SummerNote](https://summernote.org/)
 
 Databases
+
 - Psycopg
 - Elephant SQL
 
@@ -373,5 +377,126 @@ Databases
 - [Am I Responsive?](https://ui.dev/amiresponsive) Used to create mock-ups for various screen sizes.
 - [Dynamic Drive](http://tools.dynamicdrive.com/favicon/) Used to create favicon.
 
+</details>
+</details>
+</details>
+</details>
+
+<details>
+<summary><h4>Code Validation</h4></summary>
+
+<details>
+<summary><h5>HTML Validation</h5></summary>
+
+**I've valididated my HTML using [validator.w3.org](https://validator.w3.org/#validate_by_input)**
+
+[index.html is valid](static/images/readme/validation/html_validation_pass.jpg)
+
+[main_thread_detail.html is valid](static/images/readme/validation/html_validation_pass.jpg)
+
+[account_management.html, login.html, signup.html, admin.html, superuser.html, find_a_game.html, main_thread_editor.html, toasts.html is valid](static/images/readme/validation/html_validation_pass.jpg)
+
+[login.html, signup.html is valid](static/images/readme/validation/html_validation_pass.jpg)
+
+[403.html, 404.html, 500.html is valid](static/images/readme/validation/html_validation_pass.jpg)
+
+</details>
+
+<details>
+<summary><h5>CSS Validation</h5></summary>
+
+**I've valididated my CSS using [jigsaw.w3.org/css](https://jigsaw.w3.org/css-validator/#validate_by_input)**
+
+[fonts.css is valid](http://jigsaw.w3.org/css-validator/images/vcss)
+
+[style.css is valid!](http://jigsaw.w3.org/css-validator/images/vcss)
+
+</details>
+
+<details>
+<summary><h5>JS Validation</h5></summary>
+
+**I've valididated my JS using [jshint](https://jshint.com/)**
+
+csrf.js is valid
+
+Four ES6 warnings
+
+1. 'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+2. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+3. 'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+4. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+
+One unused variable that gets used in main_thread_editor.js
+
+1. getCookie
+
+homepage_main_thread_search.js is valid
+
+One undefined variable which seems to be references jquery
+
+1. $
+
+main_thread_editor.js is valid
+
+One ES6 warning
+
+1. arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+
+Five undefined variables that are referencing other parts of the code
+
+1. $
+2. getCookie
+3. toastBody
+4. notificationToast
+5. bootstrap
+
+One unused variable which is used elsewhere
+
+1. formData
+
+toasts.js is valid
+
+25 warnings all related to ES6
+
+1. 'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+2. 'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+3. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+4. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+5. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+6. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+7. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+8. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+9. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+10. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+11. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+12. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+13. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+14. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+15. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+16. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+17. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+18. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+19. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+20. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+21. 'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+22. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+23. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+24. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+25. 'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+
+Two undefined variables which are used elsewhere.
+
+1. bootstrap
+2. getCookie
+
+</details>
+
+<details>
+<summary><h5>Python Validation</h5></summary>
+
+**I've valididated my Python using [pep8ci](https://pep8ci.herokuapp.com/)**
+
+All python code is to PEP 8 standard
 </details>
 </details>
