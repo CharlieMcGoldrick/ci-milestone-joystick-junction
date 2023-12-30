@@ -383,6 +383,86 @@ Databases
 </details>
 
 <details>
+<summary><h2>Bugs</h2></summary>
+
+<h3>Known Bugs</h3>
+
+<h3>Fixed Bugs</h3>
+
+- Fix: Handling 'account_management' View
+I noticed that in our account_management view, I had originally used request.POST to determine if the user was trying to register by checking if 'register' is in request.POST. However, I realized that there was no 'register' input included in the template, causing the registration process to fail. To resolve this issue and ensure proper user registration, I added a hidden input with the name 'register' and value 'true' to the form in the template. This change ensures that the 'register' parameter is correctly set when the user registers.
+
+- Fix: Removing HTML5 Email Validation Message
+In this commit, I addressed an issue where the HTML5 automatic email validation message was interfering with the functionality of the email toast. The validation message was unnecessary as client-side validation was being handled through toasts, and server-side validation was implemented in the forms.py. Therefore, I removed the HTML5 email validation message to ensure a smoother user experience and proper functionality of the email toast.
+
+- Fix: Correcting Submit Button Name in Signup Form & Views
+During the code analysis, I discovered that the POST request was being received, but neither the "Login form submitted" nor the "Signup form submitted" messages were being printed. This was due to neither 'login' in request.POST nor 'register' in request.POST being true.
+
+The issue was traced to the name attribute of the submit button in the signup form, which did not match the string being checked in the view. To address this issue, I changed the name attribute of the submit button in the signup form to "register" to ensure proper form submission detection. The issue arose from a transition from using "registration" to "sign up" naming, which resulted in the mismatch.
+
+- Fix: Setting 'X-CSRFToken' Header in Fetch Request
+This commit fixes an issue where the 'X-CSRFToken' header value in the fetch request was not being set correctly. It now uses the 'getCookie' function to obtain the CSRF token, ensuring proper token inclusion in the request header.
+
+- Fix: Readding Hidden Input Field for Form Submission
+This commit re-adds a hidden input field for form submission, addressing an issue where the form submission process was not working correctly due to the missing field. The hidden input field ensures proper handling of form data on submission.
+
+- Fix: Adding Login Redirect
+This commit fixes the issue of a missing login redirect by explicitly adding it. By default, Django allauth attempts to redirect to "/accounts/profile/" after signup, which could lead to a 404 error if the URL is not defined in the project's URLs configuration. This fix ensures a proper login redirect URL is set to avoid the 404 error.
+
+- Fix: Updating Login Form Action URL
+I updated the action URL in the login form. Previously, it was set to {% url 'account_login' %}, which was directing the form to a non-existent account_login page. To resolve this issue, I changed the action URL to {% url 'account_management' %} to ensure that the form submits data to the correct endpoint, which is the account_management page where login requests are handled.
+
+- Fix: Handling Signup Form Submission and Redirects
+I updated the toasts.js script to handle form submissions more effectively. This change ensures proper error handling and successful redirection after a successful signup.
+
+- Fix: Correcting ALLOWED_HOSTS Setting in Django Settings
+Fixed an issue in the Django settings where ALLOWED_HOSTS was incorrectly defined as a single string, now set as a list.
+
+- Fix: Using Internal Fonts
+Updated the CSS to use fonts loaded from internal files instead of Google Fonts. This change ensures that the correct fonts are always used, regardless of the availability of Google Fonts.
+
+- Fix: Updating URL Path for 'search_games_for_main_thread'
+Updated import reference for 'search_games_for_main_thread' in URLs to 'views.search_games_for_main_thread' to align with the views structure. This change is necessary because in the 'views.py' file, the 'search_games_for_main_thread' function is defined, and it should be referenced with the 'views' prefix as specified in the import statement 'from . import views' at the beginning of the 'urls.py' file.
+
+- Fix: Handling Unix Timestamp in 'create_game_main_thread'
+The fix addresses an issue in the create_game_main_thread function where a TypeError was raised when attempting to process a Unix timestamp for first_release_date. The fix ensures proper handling of the timestamp, preventing the error and enabling the function to work as intended.
+
+- Fix: Improving JSON Data Handling
+Addressed an issue where data was not being properly retrieved and stored in the created thread from the IGDB request, despite being present in the AJAX request. This fix ensures that all relevant data is correctly extracted and stored when creating a new thread.
+
+- Fix: Removing Unnecessary POST Request
+Removed redundant POST request by relocating request handling from toasts.js to main_thread_editor.js. This change ensures a single, more efficient POST request.
+
+- Fix: Adding Variables to Global Scope
+Enhanced code modularity by making specific variables global, enabling cross-file access for toast functionality in the main_thread_editor.js.
+
+- Fix: Correcting Homepage Search Result Links
+In this commit, I made changes to ensure that the search results on the homepage properly link to the main_thread_details.html page. This involved updating the AJAX request in the JavaScript code to include the correct URL for each search result, and modifying the views to return the game's game_id as part of the search results data.
+
+- Fix: Setting Correct Default Format for 'game_id' Field
+This commit fixes an issue related to the default format of the game_id field in the Comment model. The previous default value was set as a string with a date format ('2022-01-01 00:00:00'), which has been corrected to use an integer default value of 1. This change ensures that the default game_id format aligns with the expected data type and resolves any compatibility issues with the field's default value.
+
+- Fix: Relocating Scripts for Signup Functionality
+In this commit, I addressed a critical issue where users were unable to sign up due to script misplacement. To resolve this problem, I carefully relocated the scripts to their appropriate pages, ensuring that the signup functionality now functions as intended. This fix is crucial for providing users with a seamless registration process, as it eliminates obstacles that were hindering their ability to create accounts on the platform.
+
+- Fix: Handling Multiple Main Thread Creations
+This commit addresses a critical issue related to multiple main thread creations. The problem was traced back to the usage of $(document).one("submit", ".create-thread-form", function (e) {...} in the JavaScript code. The .one() method is designed to execute the event handler function only once for each element, leading to unexpected behavior when users attempted to submit the form multiple times without refreshing the page. To resolve this issue, I replaced .one() with .on(), ensuring that the event handler executes every time the form is submitted. This fix guarantees a smoother user experience and resolves the problem of unintended limitations on main thread creation.
+
+- Fix: Resolving Delete Confirmation Button Issue
+The problem arises from repeated event binding for the delete confirmation button in your JavaScript code. Each time a delete button is clicked, a new event handler is added to the confirmation button, potentially causing multiple AJAX requests upon confirmation and leading to the issue of multiple server logs for a single delete operation. To fix this, you should use the .off() method to unbind previous click events from the confirmation button before binding a new one. This solution ensures proper event management and resolves the problem of excessive server log entries for delete actions.
+
+- Fix: Handling Empty Arrays and Null Fields
+This commit fixes the issue where fields with empty arrays and null values were not being correctly handled. The fix involves checking if the field is truthy and not an empty array represented as a string ("[]"). If these conditions are met, the field is processed as before. Otherwise, the text is set to "N/A". This ensures that fields with empty arrays and null values are correctly displayed as "N/A".
+
+- Fix: Moving 'endblock' to the Bottom of Page
+Moved the "endblock" to the bottom of the page to correct issues with missing closing divs in Django templates.
+
+- Fix: Redirect in 'reply_to_comment' View
+Updated the redirect in the reply_to_comment view to pass the game_id as an integer. This resolves a NoReverseMatch error that was occurring when trying to create a reply to a comment.
+
+</details>
+
+<details>
 <summary><h4>Code Validation</h4></summary>
 
 <details>
@@ -498,5 +578,6 @@ Two undefined variables which are used elsewhere.
 **I've valididated my Python using [pep8ci](https://pep8ci.herokuapp.com/)**
 
 All python code is to PEP 8 standard
+
 </details>
 </details>
