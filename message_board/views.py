@@ -132,7 +132,7 @@ def reply_to_comment(request, comment_id):
             comment=parent_comment, user=request.user, text=text)
 
         # Redirect to the main_thread_detail page
-        return redirect('main_thread_detail', game_id=reply.comment.game_id)
+        return redirect('main_thread_detail', game_id=reply.comment.game_id.game_id)
     else:
         return HttpResponseBadRequest('Invalid request')
 
