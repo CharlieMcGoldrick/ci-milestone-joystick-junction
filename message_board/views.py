@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignupForm
 from .models import MainThread, Comment, Upvote, Downvote, Reply, ReplyUpvote, ReplyDownvote
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.urls import reverse
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login as auth_login, logout
@@ -64,58 +64,68 @@ def post_comment(request, game_id):
         # Create a new Comment instance
         Comment.objects.create(game_id=mainthread, user=request.user, text=text)
 
-        # Return a success response
-        return JsonResponse({'status': 'success'})
+        # Redirect to the main_thread_detail page
+        return redirect('main_thread_detail', game_id=game_id)
 
     # If the request is not a POST request, return an error response
     else:
-        return JsonResponse({'error': 'Invalid request'}, status=400)
+        return HttpResponseBadRequest('Invalid request')
 
 @login_required
 def reply_to_comment(request, comment_id):
     if request.method == 'POST':
         parent_comment = get_object_or_404(Comment, id=comment_id)
         text = request.POST.get('text')
-        Reply.objects.create(comment=parent_comment, user=request.user, text=text)
-        return JsonResponse({'status': 'success'})
+        reply = Reply.objects.create(comment=parent_comment, user=request.user, text=text)
+        
+        # Redirect to the main_thread_detail page
+        return redirect('main_thread_detail', game_id=reply.comment.game_id)
     else:
-        return JsonResponse({'error': 'Invalid request'}, status=400)
+        return HttpResponseBadRequest('Invalid request')
 
 @login_required
 def upvote_comment(request, comment_id):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, id=comment_id)
         Upvote.objects.create(user=request.user, comment=comment)
-        return JsonResponse({'status': 'success'})
+        
+        # Redirect to the main_thread_detail page
+        return redirect('main_thread_detail', game_id=comment.game_id.game_id)
     else:
-        return JsonResponse({'error': 'Invalid request'}, status=400)
+        return HttpResponseBadRequest('Invalid request')
 
 @login_required
 def downvote_comment(request, comment_id):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, id=comment_id)
         Downvote.objects.create(user=request.user, comment=comment)
-        return JsonResponse({'status': 'success'})
+        
+        # Redirect to the main_thread_detail page
+        return redirect('main_thread_detail', game_id=comment.game_id.game_id)
     else:
-        return JsonResponse({'error': 'Invalid request'}, status=400)
+        return HttpResponseBadRequest('Invalid request')
 
 @login_required
 def upvote_reply(request, reply_id):
     if request.method == 'POST':
         reply = get_object_or_404(Reply, id=reply_id)
         ReplyUpvote.objects.create(user=request.user, reply=reply)
-        return JsonResponse({'status': 'success'})
+        
+        # Redirect to the main_thread_detail page
+        return redirect('main_thread_detail', game_id=reply.comment.game_id.game_id)
     else:
-        return JsonResponse({'error': 'Invalid request'}, status=400)
+        return HttpResponseBadRequest('Invalid request')
 
 @login_required
 def downvote_reply(request, reply_id):
     if request.method == 'POST':
         reply = get_object_or_404(Reply, id=reply_id)
         ReplyDownvote.objects.create(user=request.user, reply=reply)
-        return JsonResponse({'status': 'success'})
+        
+        # Redirect to the main_thread_detail page
+        return redirect('main_thread_detail', game_id=reply.comment.game_id.game_id)
     else:
-        return JsonResponse({'error': 'Invalid request'}, status=400)
+        return HttpResponseBadRequest('Invalid request')
 
 def make_main_thread_search_request(query):
     endpoint = 'games'
