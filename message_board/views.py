@@ -16,7 +16,8 @@ import json
 
 def home(request):
     main_threads = MainThread.objects.filter(status=1)
-    return render(request, 'index.html', {'main_threads': main_threads})
+    new_threads = MainThread.objects.filter(status=1).order_by('-created_date')[:5]
+    return render(request, 'index.html', {'main_threads': main_threads, 'new_threads': new_threads})
 
 def homepage_search_threads(request):
     query = request.GET.get('search')

@@ -54,14 +54,15 @@
           <div class="col-md-4">
             <div class="card mb-3 card-spacing">
               <div class="card-body">
-                <h2>New Games</h2>
-                {% for main_thread in main_threads %}
+                <h2>New Threads</h2>
+                {% for main_thread in new_threads %}
                 <div class="thread">
                   <h3>
                     <a
                       href="{% url 'main_thread_detail' game_id=main_thread.game_id %}"
-                      >{{ main_thread.name }}</a
                     >
+                      {{ main_thread.name }}
+                    </a>
                   </h3>
                 </div>
                 {% empty %}
