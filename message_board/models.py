@@ -66,7 +66,6 @@ class Comment(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     upvotes = models.ManyToManyField('Upvote', blank=True, related_name='comments_upvoted')
     downvotes = models.ManyToManyField('Downvote', blank=True, related_name='comments_downvoted')
-    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
 
     class Meta:
         ordering = ['created_date']
@@ -87,3 +86,31 @@ class Downvote(models.Model):
 
     def __str__(self):
         return f'Downvote by {self.user} on {self.comment}'
+
+class Reply(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='replies',  null=True)
+    text = models.CharField(max_length=1000)
+    created_date = models.DateTimeField(auto_now_add=True)
+    upvotes = models.ManyToManyField('ReplyUpvote', blank=True, related_name='replies_upvoted')
+    downvotes = models.ManyToManyField('ReplyDownvote', blank=True, related_name='replies_downvoted')
+
+    class Meta:
+        ordering = ['created_date']
+
+    def __str__(self):
+        return self.text
+
+class ReplyUpvote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    reply = models.ForeignKey(Reply, on_delete=models.CASCADE, related_name='upvotes_from')
+
+    def __str__(self):
+        return f'Upvote by {self.user} on {self.reply}'
+
+class ReplyDownvote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    reply = models.ForeignKey(Reply, on_delete=models.CASCADE, related_name='downvotes_from')
+
+    def __str__(self):
+        return f'Downvote by {self.user} on {self.reply}'
