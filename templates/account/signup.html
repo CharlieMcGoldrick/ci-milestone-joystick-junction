@@ -1,32 +1,52 @@
-{% load static %}
-{% load i18n %}
-{% block content %}
+{% load static %} {% load i18n %} {% block content %}
 <form id="signupForm" method="post" novalidate>
-    {% csrf_token %}
-    <div class="mb-3 mt-3">
-        <label for="signupEmail" class="form-label">Email</label>
-        <input type="email" class="form-control" id="signupEmail" name="{{ signup_form.email.name }}"
-            placeholder="Enter your email here" required>
+  {% csrf_token %}
+  <div class="mb-3 mt-3">
+    <label for="signupEmail" class="form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="signupEmail"
+      name="email"
+      placeholder="Enter your email here"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="signupUsername" class="form-label">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="signupUsername"
+      name="username"
+      placeholder="Enter your username here"
+      required
+    />
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="signupPassword" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="signupPassword"
+        name="password1"
+        placeholder="Enter your password here"
+        required
+      />
     </div>
-    <div class="mb-3">
-        <label for="signupUsername" class="form-label">Username</label>
-        <input type="text" class="form-control" id="signupUsername" name="{{ signup_form.username.name }}"
-            placeholder="Enter your username here" required>
+    <div class="col-md-6 mb-3">
+      <label for="signupPassword2" class="form-label">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="signupPassword2"
+        name="password2"
+        placeholder="Enter your password again"
+        required
+      />
     </div>
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="signupPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="signupPassword" name="{{ signup_form.password1.name }}"
-                placeholder="Enter your password here" required>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="signupPassword2" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="signupPassword2" name="{{ signup_form.password2.name }}"
-                placeholder="Enter your password again" required>
-        </div>
-    </div>
-    <input type="hidden" name="signup" value="true">
-    <button type="submit" class="btn btn-primary w-100">Signup</button>
+  </div>
+  <input type="hidden" name="signup" value="true" />
+  <button type="submit" class="btn btn-primary w-100">Signup</button>
 </form>
-{% include "toasts.html" %}
-{% endblock content %}
